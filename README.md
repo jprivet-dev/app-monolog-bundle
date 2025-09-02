@@ -103,13 +103,15 @@ make stop  # Stop the project (down alias)
 ## Test Monolog Bundle from jprivet-dev fork in your app
 
 ```shell
-mkdir repositories
+# 1. Create the contribution bundles directory if needed
+mkdir -p repositories
 
+# 2. Clone the bundle into this directory
 git -C repositories clone git@github.com:jprivet-dev/monolog-bundle.git --branch handler-configuration-segmentation
 
+# 3. Require the bundle and link it automatically via Composer
 composer config repositories.monolog-bundle path repositories/monolog-bundle
-
-composer require repositories/monolog-bundle:@dev
+composer require symfony/monolog-bundle:@dev
 ```
 
 ## Docs
