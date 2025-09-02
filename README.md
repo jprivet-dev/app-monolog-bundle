@@ -45,17 +45,6 @@ make stop  # Stop the project (down alias)
 — 🐳 🎵 THE SYMFONY STARTER MAKEFILE 🎵 🐳 —————————————————————————————————
   help                          Display this help message with available commands
 
-— GENERATION 🔨 ————————————————————————————————————————————————————————————
-  minimalist                    Generate a minimalist Symfony application with Docker configuration (stable release)
-  minimalist@lts                Generate a minimalist Symfony application with Docker configuration (LTS - long-term support release)
-  webapp                        Generate a webapp with Docker configuration (stable release)
-  webapp@lts                    Generate a webapp with Docker configuration (LTS - long-term support release)
-
-  clone                         Clone and extract 'dunglas/symfony-docker' configuration files at the root
-  composer_webapp               Add extra packages to give you everything you need to build a web application
-
-  clear_all                     Remove all 'dunglas/symfony-docker' configuration files and all Symfony application files
-
 — PROJECT 🚀 ———————————————————————————————————————————————————————————————
   start                         Start the project and show info (up_detached & info alias)
   stop                          Stop the project (down alias)
@@ -164,7 +153,6 @@ make stop  # Stop the project (down alias)
 ## Docs
 
 * [Validate certificates](docs/certificates.md)
-* [Save your generated Symfony application](docs/save.md)
 * [Accessing the `var/` directory](docs/var.md)
 * [Docker build options](docs/options.md)
 * [Troubleshooting](docs%2Ftroubleshooting.md)

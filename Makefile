@@ -148,55 +148,6 @@ help: ## Display this help message with available commands
 	}'
 	@echo
 
-## — GENERATION 🔨 ————————————————————————————————————————————————————————————
-
-#
-# This complete GENERATION block, with these following targets are for initial setup and can be removed after saving the project.
-#
-
-.PHONY: minimalist
-minimalist: clone build up_detached permissions images info ## Generate a minimalist Symfony application with Docker configuration (stable release)
-
-minimalist@lts: ## Generate a minimalist Symfony application with Docker configuration (LTS - long-term support release)
-	SYMFONY_VERSION=$(SYMFONY_LTS_VERSION) $(MAKE) minimalist
-
-.PHONY: webapp
-webapp: clone build up_detached permissions composer_webapp down up_detached images info ## Generate a webapp with Docker configuration (stable release)
-
-webapp@lts: ## Generate a webapp with Docker configuration (LTS - long-term support release)
-	SYMFONY_VERSION=$(SYMFONY_LTS_VERSION) $(MAKE) webapp
-
-##
-
-.PHONY: clone
-clone: ## Clone and extract 'dunglas/symfony-docker' configuration files at the root
-	@printf "\n$(Y)Clone 'dunglas/symfony-docker'$(S)"
-	@printf "\n$(Y)------------------------------$(S)\n\n"
-ifeq ($(wildcard Dockerfile),)
-	@printf "Repository: $(Y)$(REPOSITORY)$(S)\n"
-	git clone $(REPOSITORY) $(CLONE_DIR) --depth 1
-	@printf "\n$(Y)Extract 'dunglas/symfony-docker' at the root$(S)"
-	@printf "\n$(Y)--------------------------------------------$(S)\n\n"
-	rsync -av --exclude=".editorconfig" --exclude=".git" --exclude=".gitattributes" --exclude=".github" --exclude="docs" --exclude="LICENSE" --exclude="README.md" $(CLONE_DIR)/ .
-	rm -rf $(CLONE_DIR)
-	@if [ -f LICENSE ]; then \
-		git restore LICENSE; \
-	fi
-	@printf " $(G)✔$(S) 'dunglas/symfony-docker' cloned and extracted at the root.\n\n"
-else
-	@printf " $(R)⨯$(S) 'dunglas/symfony-docker' configuration already present at the root.\n\n"
-endif
-
-composer_webapp: ## Add extra packages to give you everything you need to build a web application
-	@printf "\n$(Y)Add extra packages to build a web application$(S)"
-	@printf "\n$(Y)---------------------------------------------$(S)\n\n"
-	$(COMPOSER) require webapp
-
-##
-
-clear_all: down ## Remove all 'dunglas/symfony-docker' configuration files and all Symfony application files
-	git reset --hard && git clean -f -d
-
 ## — PROJECT 🚀 ———————————————————————————————————————————————————————————————
 
 .PHONY: start
