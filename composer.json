@@ -69,5 +69,11 @@
     "require-dev": {
         "symfony/stopwatch": "6.4.*",
         "symfony/web-profiler-bundle": "6.4.*"
+    },
+    "repositories": {
+        "monolog-bundle": {
+            "type": "path",
+            "url": "repositories/monolog-bundle"
+        }
     }
 }
