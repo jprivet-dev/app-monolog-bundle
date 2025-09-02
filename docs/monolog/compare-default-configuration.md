@@ -1,10 +1,10 @@
-# Compare Legacy & New "Default configuration"
+# Compare legacy & new default configuration
 
 ⬅️ [MonologBundle](../monolog.md)
 
 ---
 
-## Legacy "Default configuration"
+## Legacy default configuration
 
 ```shell
 cd repositories/monolog-bundle
@@ -169,7 +169,7 @@ monolog:
                 elements:             []
 ```
 
-## New "Default configuration"
+## New default configuration
 
 ```shell
 cd repositories/monolog-bundle
