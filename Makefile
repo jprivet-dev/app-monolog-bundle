@@ -165,9 +165,9 @@ clone_monolog_bundle: ## Clone Symfony Monolog Bundle in repositories directory
 	@printf "\n$(Y)Clone Symfony Monolog Bundle in repositories directory$(S)"
 	@printf "\n$(Y)------------------------------------------------------$(S)\n\n"
 	@if [ ! -d "$(REPOSITORIES_DIR)/monolog-bundle" ]; then \
-		git -C $(REPOSITORIES_DIR) git@github.com:jprivet-dev/monolog-bundle.git --branch handler-configuration-segmentation; \
+		git -C $(REPOSITORIES_DIR) clone git@github.com:jprivet-dev/monolog-bundle.git --branch handler-configuration-segmentation; \
 	else \
-		@printf " $(G)✔$(S) Repository Symfony Monolog Bundle already exists, skipping clone operation.\n"
+		printf " $(G)✔$(S) Repository Symfony Monolog Bundle already exists, skipping clone operation.\n"; \
 	fi
 
 ## — SYMFONY 🎵 ———————————————————————————————————————————————————————————————
