@@ -50,13 +50,8 @@ make stop  # Stop the project (down alias)
   stop                          Stop the project (down alias)
   restart                       Stop & Start the project and show info (up_detached & info alias)
   info                          Show project access info
-
   install                       Start the project, install dependencies and show info
   check                         Check everything before you deliver
-
-  webapp_install                Start the project, install dependencies and show info
-  webapp_check                  Check everything before you deliver
-  webapp_tests               t  Run all tests
 
 — SYMFONY 🎵 ———————————————————————————————————————————————————————————————
   symfony                    sf Run Symfony console command - Usage: make symfony ARG="cache:clear"
@@ -75,54 +70,6 @@ make stop  # Stop the project (down alias)
   composer_update               Update Composer packages
   composer_update_lock          Update only the content hash of composer.lock without updating dependencies
   composer_validate             Validate composer.json and composer.lock
-
-— DOCTRINE & SQL 💽 ————————————————————————————————————————————————————————
-  db_drop                       Drop the database - $ make db_drop [ARG=<arguments>] - Example: $ make db_drop ARG="--env=test"
-  db_create                     Create the database - $ make db_create [ARG=<arguments>] - Example: $ make db_create ARG="--env=test"
-  db_clear                      Drop and create the database
-  db_init                       Drop and create the database and add fixtures
-
-  validate                      Validate the mapping files - $ make validate [ARG=<arguments>] - Example: $ make validate ARG="--env=test"
-  update                        Generate and output the SQL needed to synchronize the database schema with the current mapping metadata
-  update_force                  Execute the generated SQL needed to synchronize the database schema with the current mapping metadata
-
-  migration                     Create a new migration based on database changes (format the generated SQL)
-  migrate                       Execute a migration to the latest available version (in a transaction) - $ make migrate [ARG=<param>] - Example: $ make migrate ARG="current+3"
-  list                          Display a list of all available migrations and their status
-  execute                       Execute one or more migration versions up or down manually - $ make execute ARG=<arguments> - Example: $ make execute ARG="DoctrineMigrations\Version20240205143239"
-  generate                      Generate a blank migration class
-
-  sql                           Execute the given SQL query and output the results - $ make sql [QUERY=<query>] - Example: $ make sql QUERY="SELECT * FROM user"
-  sql_tables                    Show all tables
-
-  fixtures                      Load fixtures (CAUTION! by default the load command purges the database) - $ make fixtures [ARG=<param>] - Example: $ make fixtures ARG="--append"
-
-— POSTGRESQL 💽 ————————————————————————————————————————————————————————————
-  psql                          Execute psql - $ make psql [ARG=<arguments>] - Example: $ make psql ARG="-V"
-
-— TESTS ✅ —————————————————————————————————————————————————————————————————
-  phpunit                       Run PHPUnit - $ make phpunit [ARG=<arguments>] - Example: $ make phpunit ARG="tests/myTest.php"
-  coverage                      Generate code coverage report in HTML format for all tests
-  dox                           Report test execution progress in TestDox format for all tests
-
-  xdebug_version                Xdebug version number
-
-— ASSETS 🎨‍ ————————————————————————————————————————————————————————————————
-  assets                        Generate all assets.
-
-  asset_map_clear               Clear all assets in the public output directory.
-  asset_map_compile             Compile all mapped assets and writes them to the final public output directory.
-  asset_map_debug               See all of the mapped assets .
-
-  importmap_audit               Check for security vulnerability advisories for dependencies
-  importmap_install             Download all assets that should be downloaded
-  importmap_outdated            List outdated JavaScript packages and their latest versions
-  importmap_remove              Remove JavaScript packages
-  importmap_require             Require JavaScript packages
-  importmap_update              Update JavaScript packages to their latest versions
-
-— TRANSLATION 🇬🇧 ————————————————————————————————————————————————————————————
-  extract                       Extracts translation strings from templates (fr)
 
 — DOCKER 🐳 ————————————————————————————————————————————————————————————————
   up                            Start the containers - $ make up [ARG=<arguments>] - Example: $ make up ARG=-d
