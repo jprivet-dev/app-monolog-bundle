@@ -100,20 +100,38 @@ make stop  # Stop the project (down alias)
 
 <!-- MAKEFILE_COMMANDS_END -->
 
-## Test Monolog Bundle from jprivet-dev fork in your app
+## Testing the MonologBundle contribution
+
+In this project, everything is already configured, but if you want to test the **MonologBundle** in your app, from the `handler-configuration-segmentation` development branch, from the `jprivet-dev` fork, follow these steps.
+
+
+1. Create the contribution bundles directory and clone `jprivet-dev/monolog-bundle`:
+
+    ```shell
+    mkdir -p repositories
+    git -C repositories clone git@github.com:jprivet-dev/monolog-bundle.git --branch handler-configuration-segmentation
+    ```
+
+2. Link the local bundle via Composer:
+
+    ```shell
+    composer config repositories.monolog-bundle path repositories/monolog-bundle
+    composer update --lock
+    ```
+
+3. Require the bundle via Composer:
+
+    ```shell
+    composer require --no-interaction symfony/monolog-bundle:@dev
+    ```
+
+### How to remove the dependency and repository configuration?
+
+Once you're finished working on the bundle, you can remove the dependency and repository configuration to return your project to its original state.
 
 ```shell
-# 1. Create the contribution bundles directory if needed
-mkdir -p repositories
-
-# 2. Clone the bundle into this directory
-git -C repositories clone git@github.com:jprivet-dev/monolog-bundle.git --branch handler-configuration-segmentation
-
-# 3. Require the bundle and link it automatically via Composer
-composer config repositories.monolog-bundle path repositories/monolog-bundle
-composer update --lock
-
-composer require --no-interaction symfony/monolog-bundle:@dev
+composer remove symfony/monolog-bundle
+composer config --unset repositories.monolog-bundle
 ```
 
 ## Docs
