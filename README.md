@@ -1,4 +1,4 @@
-# Symfony application for testing the MonologPocBundle
+# Symfony application for testing the MonologBundle contribution
 
 ## Prerequisites
 
