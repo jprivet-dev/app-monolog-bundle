@@ -48,12 +48,6 @@ $(info Warning: In this Makefile it is not possible to use variables from .env.l
 endif
 
 #
-# FILES & DIRECTORIES
-#
-
-REPOSITORIES_DIR=repositories
-
-#
 # DOCKER OPTIONS
 # See https://github.com/dunglas/symfony-docker/blob/main/docs/options.md
 #
@@ -164,8 +158,8 @@ check: composer_validate ## Check everything before you deliver
 clone_monolog_bundle: ## Clone Symfony Monolog Bundle in repositories directory
 	@printf "\n$(Y)Clone Symfony Monolog Bundle in repositories directory$(S)"
 	@printf "\n$(Y)------------------------------------------------------$(S)\n\n"
-	@if [ ! -d "$(REPOSITORIES_DIR)/monolog-bundle" ]; then \
-		git -C $(REPOSITORIES_DIR) clone git@github.com:jprivet-dev/monolog-bundle.git --branch handler-configuration-segmentation; \
+	@if [ ! -d "repositories/monolog-bundle" ]; then \
+		git -C repositories clone git@github.com:jprivet-dev/monolog-bundle.git --branch handler-configuration-segmentation; \
 	else \
 		printf " $(G)✔$(S) Repository Symfony Monolog Bundle already exists, skipping clone operation.\n"; \
 	fi
@@ -233,6 +227,7 @@ composer_validate: ## Validate composer.json and composer.lock
 up: ## Start the containers - $ make up [ARG=<arguments>] - Example: $ make up ARG=-d
 	$(UP_ENV) $(COMPOSE) up --remove-orphans $(ARG)
 	$(MAKE) git_safe_dir
+	$(MAKE) git_safe_dir_monolog_bundle
 
 up_detached: ARG=--wait -d
 up_detached: up ## Start the containers (wait for services to be running|healthy - detached mode)
@@ -312,8 +307,11 @@ else
 	@printf " $(Y)›$(S) 'make permissions' is typically not needed on $(UNAME_S).\n"
 endif
 
-git_safe_dir: ## Add /app to Git's safe directories within the php container
+git_safe_dir:
 	$(COMPOSE) exec php git config --global --add safe.directory /app
+
+git_safe_dir_monolog_bundle: repositories/monolog-bundle
+	$(COMPOSE) exec php git config --global --add safe.directory /app/repositories/monolog-bundle
 
 ## — UTILITIES 🛠️ ——————————————————————————————————————————————————————————————
 
