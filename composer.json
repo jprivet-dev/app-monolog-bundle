@@ -69,7 +69,7 @@
     "repositories": {
         "monolog-bundle": {
             "type": "path",
-            "url": "../repositories/monolog-bundle"
+            "url": "repositories/monolog-bundle"
         }
     },
     "require-dev": {
