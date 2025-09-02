@@ -137,7 +137,6 @@ composer config --unset repositories.monolog-bundle
 ## Docs
 
 * [Validate certificates](docs/certificates.md)
-* [Accessing the `var/` directory](docs/var.md)
 * [Docker build options](docs/options.md)
 * [Troubleshooting](docs%2Ftroubleshooting.md)
 
