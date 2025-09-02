@@ -4,7 +4,8 @@
 
 This project is a **dockerized environment** designed to streamline the contribution process for the **MonologBundle**. It provides a fully functional Symfony application that you can use to test the work on the `handler-configuration-segmentation` branch of the `jprivet-dev/monolog-bundle` fork. The goal is to offer a consistent and isolated sandbox, allowing you to focus on developing and testing the features without worrying about local environment setup.
 
-> See https://github.com/jprivet-dev/monolog-bundle/tree/handler-configuration-segmentation
+* External link: https://github.com/jprivet-dev/monolog-bundle/tree/handler-configuration-segmentation
+* Internal docs: [MonologBundle: what problem do we want to solve?](docs/monolog.md)
 
 ## Prerequisites
 
@@ -153,15 +154,30 @@ composer config --unset repositories.monolog-bundle
 
 ## Docs
 
+* [MonologBundle: what problem do we want to solve?](docs/monolog.md)
 * [Validate certificates](docs/certificates.md)
 * [Docker build options](docs/options.md)
 * [Troubleshooting](docs%2Ftroubleshooting.md)
 
 ## Main resources
 
-* https://symfony.com/doc/current/setup/docker.html
-* https://github.com/dunglas/symfony-docker
-* https://github.com/jprivet-dev/symfony-docker
+* Monolog:
+  * https://symfony.com/packages/Monolog%20Bundle
+  * https://symfony.com/doc/current/logging.html
+  * https://github.com/symfony/recipes/tree/main/symfony/monolog-bundle/3.7
+* Sources of inspiration:
+  * https://symfony.com/doc/current/security.html
+  * https://github.com/sensiolabs/GotenbergBundle
+  * https://github.com/symfony/workflow
+  * https://github.com/nelmio/alice
+* The Bundle System:
+  * https://symfony.com/doc/current/bundles.html
+  * https://symfony.com/doc/current/bundles/best_practices.html
+  * https://symfony.com/doc/current/components/config/definition.html
+* Docker
+  * https://symfony.com/doc/current/setup/docker.html
+  * https://github.com/dunglas/symfony-docker
+  * https://github.com/jprivet-dev/symfony-docker
 
 ## Comments, suggestions?
 
