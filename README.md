@@ -9,8 +9,8 @@ Be sure to install the latest version of [Docker Engine](https://docs.docker.com
 ### 1. Clone this repository
 
 ```shell
-git clone git@github.com:jprivet-dev/app-monolog-poc-bundle.git
-cd app-monolog-poc-bundle
+git clone git@github.com:jprivet-dev/app-monolog-bundle.git
+cd app-monolog-bundle
 ```
 
 ### 2. Install the project
@@ -21,12 +21,12 @@ make install
 
 ### 3. Access your application
 
-Open `https://app-monolog-poc-bundle.localhost:8443/` in your browser and [accept the auto-generated TLS certificate](https://stackoverflow.com/a/15076602/1352334).
+Open `https://app-monolog-bundle.localhost:8443/` in your browser and [accept the auto-generated TLS certificate](https://stackoverflow.com/a/15076602/1352334).
 
 ### All in one command
 
 ```shell
-git clone git@github.com:jprivet-dev/app-monolog-poc-bundle.git && cd app-monolog-poc-bundle && make install
+git clone git@github.com:jprivet-dev/app-monolog-bundle.git && cd app-monolog-bundle && make install
 ```
 
 ## Daily usage
@@ -148,9 +148,9 @@ composer config --unset repositories.monolog-bundle
 
 ## Comments, suggestions?
 
-Feel free to make comments/suggestions to me in the [Git issues section](https://github.com/jprivet-dev/app-monolog-poc-bundle/issues).
+Feel free to make comments/suggestions to me in the [Git issues section](https://github.com/jprivet-dev/app-monolog-bundle/issues).
 
 ## License
 
-This project is released under the [**MIT License**](https://github.com/jprivet-dev/app-monolog-poc-bundle/blob/main/LICENSE).
+This project is released under the [**MIT License**](https://github.com/jprivet-dev/app-monolog-bundle/blob/main/LICENSE).
 
