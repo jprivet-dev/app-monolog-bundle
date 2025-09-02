@@ -225,11 +225,11 @@ composer_validate: ## Validate composer.json and composer.lock
 
 .PHONY: up
 up: ## Start the containers - $ make up [ARG=<arguments>] - Example: $ make up ARG=-d
-	$(UP_ENV) $(COMPOSE) up --remove-orphans $(ARG)
+	$(UP_ENV) $(COMPOSE) up --wait --remove-orphans $(ARG)
 	$(MAKE) git_safe_dir
 	$(MAKE) git_safe_dir_monolog
 
-up_detached: ARG=--wait -d
+up_detached: ARG=-d
 up_detached: up ## Start the containers (wait for services to be running|healthy - detached mode)
 
 .PHONY: down
