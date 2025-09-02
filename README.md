@@ -1,27 +1,31 @@
 # Symfony application for testing the MonologBundle contribution
 
+## Presentation
+
+This project is a **dockerized environment** designed to streamline the contribution process for the **MonologBundle**. It provides a fully functional Symfony application that you can use to test the work on the `handler-configuration-segmentation` branch of the `jprivet-dev/monolog-bundle` fork. The goal is to offer a consistent and isolated sandbox, allowing you to focus on developing and testing the features without worrying about local environment setup.
+
+> See https://github.com/jprivet-dev/monolog-bundle/tree/handler-configuration-segmentation
+
 ## Prerequisites
 
 Be sure to install the latest version of [Docker Engine](https://docs.docker.com/engine/install/).
 
 ## Installation
 
-### 1. Clone this repository
+1. Clone this repository:
 
-```shell
-git clone git@github.com:jprivet-dev/app-monolog-bundle.git
-cd app-monolog-bundle
-```
+    ```shell
+    git clone git@github.com:jprivet-dev/app-monolog-bundle.git
+    cd app-monolog-bundle
+    ```
 
-### 2. Install the project
+2. Install the project:
 
-```shell
-make install
-```
+    ```shell
+    make install
+    ```
 
-### 3. Access your application
-
-Open `https://app-monolog-bundle.localhost:8443/` in your browser and [accept the auto-generated TLS certificate](https://stackoverflow.com/a/15076602/1352334).
+3. Open https://app-monolog-bundle.localhost:8443/ in your browser and [accept the auto-generated TLS certificate](https://stackoverflow.com/a/15076602/1352334).
 
 ### All in one command
 
@@ -54,7 +58,7 @@ make stop  # Stop the project (down alias)
   check                         Check everything before you deliver
   tests                      t  Run all tests (app & repositories/monolog-bundle)
 
-  clone_monolog                 Clone Symfony Monolog Bundle in repositories directory
+  clone_monolog                 Clone Symfony MonologBundle in repositories directory
 
 — SYMFONY 🎵 ———————————————————————————————————————————————————————————————
   symfony                    sf Run Symfony console command - Usage: make symfony ARG="cache:clear"
