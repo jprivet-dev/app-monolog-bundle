@@ -67,9 +67,9 @@
         }
     },
     "repositories": {
-        "monolog-poc-bundle": {
+        "monolog-bundle": {
             "type": "path",
-            "url": "../monolog-bundle"
+            "url": "../repositories/monolog-bundle"
         }
     },
     "require-dev": {
