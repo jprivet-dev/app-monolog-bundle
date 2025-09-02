@@ -48,6 +48,15 @@ $(info Warning: In this Makefile it is not possible to use variables from .env.l
 endif
 
 #
+# FILES & DIRECTORIES
+#
+
+PWD            = $(shell pwd)
+NOW           := $(shell date +%Y%m%d-%H%M%S-%3N)
+COVERAGE_DIR   = build/coverage-$(NOW)
+COVERAGE_INDEX = $(PWD)/$(COVERAGE_DIR)/index.html
+
+#
 # DOCKER OPTIONS
 # See https://github.com/dunglas/symfony-docker/blob/main/docs/options.md
 #
@@ -151,7 +160,10 @@ info: ## Show project access info
 install: clone_monolog up_detached composer_install images info ## Start the project, install dependencies and show info
 
 .PHONY: check
-check: composer_validate ## Check everything before you deliver
+check: composer_validate tests ## Check everything before you deliver
+
+.PHONY: tests
+tests t: phpunit ## Run all tests
 
 ##
 
@@ -220,6 +232,27 @@ composer_update_lock: ## Update only the content hash of composer.lock without u
 
 composer_validate: ## Validate composer.json and composer.lock
 	$(COMPOSER) validate --strict --check-lock
+
+## — TESTS ✅ —————————————————————————————————————————————————————————————————
+
+.PHONY: phpunit
+phpunit: ## Run PHPUnit - $ make phpunit [ARG=<arguments>] - Example: $ make phpunit ARG="tests/myTest.php"
+	$(PHPUNIT) $(ARG)
+
+.PHONY: coverage
+coverage: DOCKER_EXEC_ENV=-e XDEBUG_MODE=coverage
+coverage: ARG=--coverage-html $(COVERAGE_DIR)
+coverage: phpunit ## Generate code coverage report in HTML format for all tests
+	@printf " $(G)✔$(S) Open in your favorite browser the file $(Y)$(COVERAGE_INDEX)$(S)\n"
+
+.PHONY: dox
+dox: ARG=--testdox
+dox: phpunit ## Report test execution progress in TestDox format for all tests
+
+##
+
+xdebug_version: ## Xdebug version number
+	$(PHP) -r "var_dump(phpversion('xdebug'));"
 
 ## — DOCKER 🐳 ————————————————————————————————————————————————————————————————
 
