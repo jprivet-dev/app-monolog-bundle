@@ -7,6 +7,7 @@
 * [What problem do we want to solve?](monolog/problem.md)
 * [New structure of the `Configuration.php` file](monolog/structure.md)
 * [Legacy VS New syntax for monolog handlers](monolog/syntax.md)
+* [Results](monolog/results.md)
 
 ---
 
