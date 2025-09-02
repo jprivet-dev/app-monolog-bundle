@@ -1,10 +1,10 @@
-# Results
+# Compare Legacy & New "Default configuration"
 
 ⬅️ [MonologBundle](../monolog.md)
 
 ---
 
-## Old "Default configuration"
+## Legacy "Default configuration"
 
 ```shell
 cd repositories/monolog-bundle
