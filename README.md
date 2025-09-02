@@ -100,6 +100,18 @@ make stop  # Stop the project (down alias)
 
 <!-- MAKEFILE_COMMANDS_END -->
 
+## Test Monolog Bundle from jprivet-dev fork in your app
+
+```shell
+mkdir repositories
+
+git -C repositories clone git@github.com:jprivet-dev/monolog-bundle.git --branch handler-configuration-segmentation
+
+composer config repositories.monolog-bundle path repositories/monolog-bundle
+
+composer require repositories/monolog-bundle:@dev
+```
+
 ## Docs
 
 * [Validate certificates](docs/certificates.md)
