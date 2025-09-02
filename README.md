@@ -52,6 +52,7 @@ make stop  # Stop the project (down alias)
   info                          Show project access info
   install                       Start the project, install dependencies and show info
   check                         Check everything before you deliver
+  tests                      t  Run all tests (app & repositories/monolog-bundle)
 
   clone_monolog                 Clone Symfony Monolog Bundle in repositories directory
 
@@ -72,6 +73,18 @@ make stop  # Stop the project (down alias)
   composer_update               Update Composer packages
   composer_update_lock          Update only the content hash of composer.lock without updating dependencies
   composer_validate             Validate composer.json and composer.lock
+
+— MONOLOG 📝 ———————————————————————————————————————————————————————————————
+  monolog_install               [repositories] Installs the MonologBundle's dependencies in its isolated vendor directory
+  monolog_tests                 [repositories] Run automated tests for MonologBundle in its isolated PHPUnit
+  monolog_dox                   [repositories] Report test execution progress in TestDox format for MonologBundle in its isolated PHPUnit
+
+— TESTS ✅ —————————————————————————————————————————————————————————————————
+  phpunit                       Run PHPUnit - $ make phpunit [ARG=<arguments>] - Example: $ make phpunit ARG="tests/myTest.php"
+  coverage                      Generate code coverage report in HTML format for all tests
+  dox                           Report test execution progress in TestDox format for all tests
+
+  xdebug_version                Xdebug version number
 
 — DOCKER 🐳 ————————————————————————————————————————————————————————————————
   up                            Start the containers - $ make up [ARG=<arguments>] - Example: $ make up ARG=-d

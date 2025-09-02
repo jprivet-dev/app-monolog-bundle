@@ -163,7 +163,7 @@ install: clone_monolog up_detached composer_install images info ## Start the pro
 check: composer_validate tests ## Check everything before you deliver
 
 .PHONY: tests
-tests t: phpunit ## Run all tests
+tests t: phpunit monolog_tests ## Run all tests (app & repositories/monolog-bundle)
 
 ##
 
@@ -232,6 +232,17 @@ composer_update_lock: ## Update only the content hash of composer.lock without u
 
 composer_validate: ## Validate composer.json and composer.lock
 	$(COMPOSER) validate --strict --check-lock
+
+## — MONOLOG 📝 ———————————————————————————————————————————————————————————————
+
+monolog_install: ## [repositories] Installs the MonologBundle's dependencies in its isolated vendor directory
+	$(COMPOSE) exec php bash -c "cd /app/repositories/monolog-bundle && composer install"
+
+monolog_tests: ## [repositories] Run automated tests for MonologBundle in its isolated PHPUnit
+	$(COMPOSE) exec php bash -c "cd /app/repositories/monolog-bundle && ./vendor/bin/simple-phpunit $(ARG)"
+
+monolog_dox: ARG=--testdox
+monolog_dox: monolog_tests ## [repositories] Report test execution progress in TestDox format for MonologBundle in its isolated PHPUnit
 
 ## — TESTS ✅ —————————————————————————————————————————————————————————————————
 
