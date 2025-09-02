@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bbb1be7b3e0dd6c1a6890edb77ccd5b8",
+    "content-hash": "dcdea31797015449de38963b39add0c6",
     "packages": [
         {
             "name": "psr/cache",
@@ -3079,7 +3079,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": {
+        "repositories/monolog-bundle": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
