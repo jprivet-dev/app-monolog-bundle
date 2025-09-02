@@ -148,14 +148,14 @@ info: ## Show project access info
 	@printf "\n"
 
 .PHONY: install
-install: clone_monolog_bundle up_detached composer_install images info ## Start the project, install dependencies and show info
+install: clone_monolog up_detached composer_install images info ## Start the project, install dependencies and show info
 
 .PHONY: check
 check: composer_validate ## Check everything before you deliver
 
 ##
 
-clone_monolog_bundle: ## Clone Symfony Monolog Bundle in repositories directory
+clone_monolog: ## Clone Symfony Monolog Bundle in repositories directory
 	@printf "\n$(Y)Clone Symfony Monolog Bundle in repositories directory$(S)"
 	@printf "\n$(Y)------------------------------------------------------$(S)\n\n"
 	@if [ ! -d "repositories/monolog-bundle" ]; then \
@@ -227,7 +227,7 @@ composer_validate: ## Validate composer.json and composer.lock
 up: ## Start the containers - $ make up [ARG=<arguments>] - Example: $ make up ARG=-d
 	$(UP_ENV) $(COMPOSE) up --remove-orphans $(ARG)
 	$(MAKE) git_safe_dir
-	$(MAKE) git_safe_dir_monolog_bundle
+	$(MAKE) git_safe_dir_monolog
 
 up_detached: ARG=--wait -d
 up_detached: up ## Start the containers (wait for services to be running|healthy - detached mode)
@@ -307,10 +307,10 @@ else
 	@printf " $(Y)›$(S) 'make permissions' is typically not needed on $(UNAME_S).\n"
 endif
 
-git_safe_dir:
+git_safe_dir: ## Add /app to Git's safe directories within the php container
 	$(COMPOSE) exec php git config --global --add safe.directory /app
 
-git_safe_dir_monolog_bundle: repositories/monolog-bundle
+git_safe_dir_monolog: repositories/monolog-bundle ## Add /app/repositories/monolog-bundle to Git's safe directories within the php container
 	$(COMPOSE) exec php git config --global --add safe.directory /app/repositories/monolog-bundle
 
 ## — UTILITIES 🛠️ ——————————————————————————————————————————————————————————————

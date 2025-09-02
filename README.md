@@ -53,6 +53,8 @@ make stop  # Stop the project (down alias)
   install                       Start the project, install dependencies and show info
   check                         Check everything before you deliver
 
+  clone_monolog                 Clone Symfony Monolog Bundle in repositories directory
+
 — SYMFONY 🎵 ———————————————————————————————————————————————————————————————
   symfony                    sf Run Symfony console command - Usage: make symfony ARG="cache:clear"
   cc                            Clear the Symfony cache
@@ -89,6 +91,7 @@ make stop  # Stop the project (down alias)
 — TROUBLESHOOTING 😵️ ———————————————————————————————————————————————————————
   permissions                p  Fix file permissions (primarily for Linux hosts)
   git_safe_dir                  Add /app to Git's safe directories within the php container
+  git_safe_dir_monolog          Add /app/repositories/monolog-bundle to Git's safe directories within the php container
 
 — UTILITIES 🛠️ ——————————————————————————————————————————————————————————————
   env_files                     Show env files loaded into this Makefile
