@@ -111,7 +111,7 @@ git -C repositories clone git@github.com:jprivet-dev/monolog-bundle.git --branch
 
 # 3. Require the bundle and link it automatically via Composer
 composer config repositories.monolog-bundle path repositories/monolog-bundle
-composer require symfony/monolog-bundle:@dev
+composer require --no-interaction symfony/monolog-bundle:@dev
 ```
 
 ## Docs
