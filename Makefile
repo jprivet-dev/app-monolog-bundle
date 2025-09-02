@@ -48,23 +48,10 @@ $(info Warning: In this Makefile it is not possible to use variables from .env.l
 endif
 
 #
-# GENERATION
-# These variables and commands are for initial setup and can be removed after saving the project.
-#
-
-# End of bug fixes: November 2026 - See https://symfony.com/releases
-SYMFONY_LTS_VERSION = 6.*
-REPOSITORY          = git@github.com:dunglas/symfony-docker.git
-CLONE_DIR           = clone
-
-#
 # FILES & DIRECTORIES
 #
 
-PWD            = $(shell pwd)
-NOW           := $(shell date +%Y%m%d-%H%M%S-%3N)
-COVERAGE_DIR   = build/coverage-$(NOW)
-COVERAGE_INDEX = $(PWD)/$(COVERAGE_DIR)/index.html
+REPOSITORIES_DIR=repositories
 
 #
 # DOCKER OPTIONS
@@ -167,10 +154,21 @@ info: ## Show project access info
 	@printf "\n"
 
 .PHONY: install
-install: up_detached composer_install images info ## Start the project, install dependencies and show info
+install: clone_monolog_bundle up_detached composer_install images info ## Start the project, install dependencies and show info
 
 .PHONY: check
 check: composer_validate ## Check everything before you deliver
+
+##
+
+clone_monolog_bundle: ## Clone Symfony Monolog Bundle in repositories directory
+	@printf "\n$(Y)Clone Symfony Monolog Bundle in repositories directory$(S)"
+	@printf "\n$(Y)------------------------------------------------------$(S)\n\n"
+	@if [ ! -d "$(REPOSITORIES_DIR)/monolog-bundle" ]; then \
+		git -C $(REPOSITORIES_DIR) git@github.com:jprivet-dev/monolog-bundle.git --branch handler-configuration-segmentation; \
+	else \
+		@printf " $(G)✔$(S) Repository Symfony Monolog Bundle already exists, skipping clone operation.\n"
+	fi
 
 ## — SYMFONY 🎵 ———————————————————————————————————————————————————————————————
 
