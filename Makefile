@@ -118,7 +118,7 @@ endif
 CONTAINER_PHP = $(COMPOSE) exec $(DOCKER_EXEC_ENV) php
 PHP           = $(CONTAINER_PHP) php
 COMPOSER      = $(CONTAINER_PHP) composer
-BASH          = $(PHP) bash -c
+BASH          = $(CONTAINER_PHP) bash -c
 CONSOLE       = $(PHP) bin/console
 PHPUNIT       = $(PHP) bin/phpunit
 
@@ -248,7 +248,7 @@ monolog_default_config: ## Dump the default configuration for MonologBundle
 ##
 
 monolog_install: ## [repositories/monolog-bundle] Installs the MonologBundle's dependencies in its isolated vendor directory
-	$(BASH) "/app/repositories/monolog-bundle && composer install"
+	$(BASH) "cd /app/repositories/monolog-bundle && composer install"
 
 monolog_phpunit: ## [repositories/monolog-bundle] Run automated tests for MonologBundle in its isolated PHPUnit
 	$(BASH) "cd /app/repositories/monolog-bundle && ./vendor/bin/simple-phpunit $(ARG)"
