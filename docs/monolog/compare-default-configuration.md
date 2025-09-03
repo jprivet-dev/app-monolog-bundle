@@ -1,4 +1,4 @@
-# Compare legacy & new default configuration
+# Compare legacy and new default configuration
 
 ⬅️ [MonologBundle](../monolog.md)
 

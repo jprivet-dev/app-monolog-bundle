@@ -1,4 +1,4 @@
-# Compare legacy & new MonologBundle structure
+# Compare legacy and new MonologBundle structure
 ⬅️ [MonologBundle](../monolog.md)
 
 ---
