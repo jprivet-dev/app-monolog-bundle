@@ -123,7 +123,7 @@ make stop  # Stop the project (down alias)
 
 <!-- MAKEFILE_COMMANDS_END -->
 
-## Testing the MonologBundle contribution
+## Testing the MonologBundle contribution in your app
 
 In this project, everything is already configured, but if you want to test the **MonologBundle** in your app, from the `handler-configuration-segmentation` development branch, from the `jprivet-dev` fork, follow these steps.
 
