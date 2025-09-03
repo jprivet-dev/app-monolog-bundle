@@ -118,6 +118,7 @@ endif
 CONTAINER_PHP = $(COMPOSE) exec $(DOCKER_EXEC_ENV) php
 PHP           = $(CONTAINER_PHP) php
 COMPOSER      = $(CONTAINER_PHP) composer
+BASH          = $(PHP) bash -c
 CONSOLE       = $(PHP) bin/console
 PHPUNIT       = $(PHP) bin/phpunit
 
@@ -163,7 +164,7 @@ install: clone_monolog up_detached composer_install images info ## Start the pro
 check: composer_validate tests ## Check everything before you deliver
 
 .PHONY: tests
-tests t: phpunit monolog_tests ## Run all tests (app & repositories/monolog-bundle)
+tests t: phpunit monolog_phpunit ## Run all tests (app & repositories/monolog-bundle)
 
 ##
 
@@ -235,14 +236,19 @@ composer_validate: ## Validate composer.json and composer.lock
 
 ## — MONOLOG 📝 ———————————————————————————————————————————————————————————————
 
-monolog_install: ## [repositories] Installs the MonologBundle's dependencies in its isolated vendor directory
-	$(COMPOSE) exec php bash -c "cd /app/repositories/monolog-bundle && composer install"
+monolog_install: ## [repositories/monolog-bundle] Installs the MonologBundle's dependencies in its isolated vendor directory
+	$(BASH) "/app/repositories/monolog-bundle && composer install"
 
-monolog_tests: ## [repositories] Run automated tests for MonologBundle in its isolated PHPUnit
-	$(COMPOSE) exec php bash -c "cd /app/repositories/monolog-bundle && ./vendor/bin/simple-phpunit $(ARG)"
+monolog_phpunit: ## [repositories/monolog-bundle] Run automated tests for MonologBundle in its isolated PHPUnit
+	$(BASH) "cd /app/repositories/monolog-bundle && ./vendor/bin/simple-phpunit $(ARG)"
 
 monolog_dox: ARG=--testdox
-monolog_dox: monolog_tests ## [repositories] Report test execution progress in TestDox format for MonologBundle in its isolated PHPUnit
+monolog_dox: monolog_phpunit ## [repositories/monolog-bundle] Report test execution progress in TestDox format for MonologBundle in its isolated PHPUnit
+
+monolog_coverage: DOCKER_EXEC_ENV=-e XDEBUG_MODE=coverage
+monolog_coverage: ARG=--coverage-html /app/$(COVERAGE_DIR)
+monolog_coverage: monolog_phpunit ## [repositories/monolog-bundle] Generate code coverage report in HTML format for MonologBundle in its isolated PHPUnit
+	@printf " $(G)✔$(S) Open in your favorite browser the file $(Y)$(COVERAGE_INDEX)$(S)\n"
 
 ## — TESTS ✅ —————————————————————————————————————————————————————————————————
 
