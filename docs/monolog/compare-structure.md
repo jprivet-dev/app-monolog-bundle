@@ -5,7 +5,7 @@
 
 ## Legacy structure
 
-> 10 directories, 21 files
+> 13 directories, 66 files
 
 ```
 ./
@@ -44,7 +44,7 @@
 
 ## New structure
 
-> 12 directories, 73 files
+> 15 directories, 118 files
 
 ```
 ./
