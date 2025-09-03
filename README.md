@@ -59,7 +59,7 @@ make stop  # Stop the project (down alias)
   check                         Check everything before you deliver
   tests                      t  Run all tests (app & repositories/monolog-bundle)
 
-  clone_monolog                 Clone Symfony MonologBundle in repositories directory
+  clone_monolog                 Clone Symfony Monolog Bundle in repositories directory
 
 — SYMFONY 🎵 ———————————————————————————————————————————————————————————————
   symfony                    sf Run Symfony console command - Usage: make symfony ARG="cache:clear"
@@ -80,9 +80,14 @@ make stop  # Stop the project (down alias)
   composer_validate             Validate composer.json and composer.lock
 
 — MONOLOG 📝 ———————————————————————————————————————————————————————————————
-  monolog_install               [repositories] Installs the MonologBundle's dependencies in its isolated vendor directory
-  monolog_tests                 [repositories] Run automated tests for MonologBundle in its isolated PHPUnit
-  monolog_dox                   [repositories] Report test execution progress in TestDox format for MonologBundle in its isolated PHPUnit
+  monolog_config                Dump the current configuration for MonologBundle (current APP_ENV)
+  monolog_config@prod           Dump the current configuration for MonologBundle (PROD)
+  monolog_default_config        Dump the default configuration for MonologBundle
+
+  monolog_install               [repositories/monolog-bundle] Installs the MonologBundle's dependencies in its isolated vendor directory
+  monolog_phpunit               [repositories/monolog-bundle] Run automated tests for MonologBundle in its isolated PHPUnit
+  monolog_dox                   [repositories/monolog-bundle] Report test execution progress in TestDox format for MonologBundle in its isolated PHPUnit
+  monolog_coverage              [repositories/monolog-bundle] Generate code coverage report in HTML format for MonologBundle in its isolated PHPUnit
 
 — TESTS ✅ —————————————————————————————————————————————————————————————————
   phpunit                       Run PHPUnit - $ make phpunit [ARG=<arguments>] - Example: $ make phpunit ARG="tests/myTest.php"

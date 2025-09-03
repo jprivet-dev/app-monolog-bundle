@@ -236,6 +236,17 @@ composer_validate: ## Validate composer.json and composer.lock
 
 ## — MONOLOG 📝 ———————————————————————————————————————————————————————————————
 
+monolog_config: ## Dump the current configuration for MonologBundle (current APP_ENV)
+	$(CONSOLE) debug:config monolog $(ARG)
+
+monolog_config@prod: ARG=--env=prod
+monolog_config@prod: monolog_config ## Dump the current configuration for MonologBundle (PROD)
+
+monolog_default_config: ## Dump the default configuration for MonologBundle
+	$(CONSOLE) config:dump-reference monolog
+
+##
+
 monolog_install: ## [repositories/monolog-bundle] Installs the MonologBundle's dependencies in its isolated vendor directory
 	$(BASH) "/app/repositories/monolog-bundle && composer install"
 
