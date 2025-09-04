@@ -118,7 +118,7 @@ endif
 CONTAINER_PHP = $(COMPOSE) exec $(DOCKER_EXEC_ENV) php
 PHP           = $(CONTAINER_PHP) php
 COMPOSER      = $(CONTAINER_PHP) composer
-BASH          = $(CONTAINER_PHP) bash -c
+BASH_COMMAND  = $(CONTAINER_PHP) bash -c
 CONSOLE       = $(PHP) bin/console
 PHPUNIT       = $(PHP) bin/phpunit
 
@@ -248,10 +248,10 @@ monolog_default_config: ## Dump the default configuration for MonologBundle
 ##
 
 monolog_install: ## [repositories/monolog-bundle] Installs the MonologBundle's dependencies in its isolated vendor directory
-	$(BASH) "cd /app/repositories/monolog-bundle && composer install"
+	$(BASH_COMMAND) "cd /app/repositories/monolog-bundle && composer install"
 
 monolog_phpunit: ## [repositories/monolog-bundle] Run automated tests for MonologBundle in its isolated PHPUnit
-	$(BASH) "cd /app/repositories/monolog-bundle && ./vendor/bin/simple-phpunit $(ARG)"
+	$(BASH_COMMAND) "cd /app/repositories/monolog-bundle && ./vendor/bin/simple-phpunit $(ARG)"
 
 monolog_dox: ARG=--testdox
 monolog_dox: monolog_phpunit ## [repositories/monolog-bundle] Report test execution progress in TestDox format for MonologBundle in its isolated PHPUnit
@@ -281,6 +281,12 @@ dox: phpunit ## Report test execution progress in TestDox format for all tests
 
 xdebug_version: ## Xdebug version number
 	$(PHP) -r "var_dump(phpversion('xdebug'));"
+
+## — BASH 💻 ——————————————————————————————————————————————————————————————————
+
+.PHONY: command
+command: ## Run a command inside the PHP container - $ make command [ARG=<arguments>]- Example: $ make command ARG="ls -al"
+	$(BASH_COMMAND) "$(ARG)"
 
 ## — DOCKER 🐳 ————————————————————————————————————————————————————————————————
 
