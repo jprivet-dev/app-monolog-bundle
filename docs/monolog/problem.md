@@ -4,7 +4,7 @@
 
 ---
 
-When generating the default **MonologBundle** configuration using `php bin/console config:dump monolog`, all available configuration keys are currently attached to a single **handler prototype** (see [Compare legacy and new default configuration](compare-default-configuration.md)).
+When generating the default **MonologBundle** configuration using `php bin/console config:dump monolog`, all available configuration keys are currently attached to a single **handler prototype** (see [Legacy VS New default configuration](compare-default-configuration.md)).
 
 ```shell
 php bin/console config:dump-reference monolog # Dump the default configuration for an extension

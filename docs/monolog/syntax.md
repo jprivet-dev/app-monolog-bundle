@@ -4,90 +4,70 @@
 
 ---
 
-This document clarifies the valid and invalid ways to configure Monolog handlers in the bundle, distinguishing between the legacy `type` key and the new `type_xxx` prefixed keys.
+With the new version of MonologBundle, two syntaxes will be possible, between the legacy `type` key and the new `type_xxx` prefixed keys.
 
-## Reminder
-
-**Legacy Syntax:**
-
-```yaml
-monolog:
-  handlers:
-    name:
-      type: xxx # This defines the handler type directly
-      opt1: ...
-      opt2: ...
-      # ... other handler options ...
-```
-
-**New Syntax:**
-
-```yaml
-monolog:
-  handlers:
-    name:
-      type_xxx: # The key itself defines the handler type
-        opt1: ...
-        opt2: ...
-        # ... handler-specific options ...
-```
-
-## Valid cases
-
-### 1. Legacy `type` syntax
+## Legacy syntax with `type` key
 
 This is the traditional way to define a handler type. It remains fully supported.
 
-**Configuration Example:**
-
 ```yaml
 monolog:
   handlers:
-    my_handler:
-      type: stream
-      # ... other stream handler options (e.g., path, level) ...
+    name:
+      type: xxx # <-- This defines the handler type directly
+      opt1: ...
+      opt2: ...
+      # ...
 ```
 
-### 2. New `type_xxx` syntax
+## New syntax with `type_xxx` prefixed keys
 
 This is the recommended new way to define a handler. The type is implicitly defined by the key, and the `type` sub-key is automatically set for backward compatibility internally.
 
-**Configuration Example:**
-
 ```yaml
 monolog:
   handlers:
-    my_handler:
-      type_stream: { } # Or with options: type_stream: { path: "php://stderr" }
+    name:
+      type_xxx: # <-- The key itself defines the handler type
+        opt1: ...
+        opt2: ...
+        # ...
 ```
-
-The `stream` handler is correctly identified. Internally, the `type` key is auto-filled (e.g., `type: stream`) for compatibility purposes.
 
 **Note:** If you run `config:dump-reference` after processing this configuration, you would see the `type` key auto-filled:
 
 ```yaml
 monolog:
   handlers:
-    my_handler:
-      type: stream # This is auto-filled for internal use
-      type_stream:
-      # ... stream handler options ...
+    name:
+      type: xxx # <-- This is auto-filled for internal use
+      type_xxx: # <-- The key itself defines the handler type
+        opt1: ...
+        opt2: ...
+        # ...
 ```
-## Invalid cases
+
+## Invalid syntaxes
 
 ### 1. No type definition
 
-This scenario occurs when a handler is defined without specifying its type, either through the `type` key or a `type_xxx` prefixed key.
-
-**Configuration Example:**
+This scenario occurs when a handler is defined without specifying its type, either through the `type` key or a `type_xxx` prefixed key:
 
 ```yaml
 monolog:
   handlers:
-    my_handler: ~ # Or an empty array: my_handler: []
+    my_handler: ~ # <-- No handler type defined
 ```
 
-**Actual Error:**
+Or:
+
+```yaml
+monolog:
+  handlers:
+    my_handler: [] # <-- No handler type defined
+```
+
+Error:
 
 ```
 Invalid configuration for path "monolog.handlers.my_handler": A handler must have a "type" or a "type_NAME" key defined.
@@ -95,19 +75,20 @@ Invalid configuration for path "monolog.handlers.my_handler": A handler must hav
 
 ### 2. Legacy `type` and new `type_xxx` with same value
 
-This scenario occurs when both the legacy `type` key and a new `type_xxx` prefixed key are used for the same handler, even if they refer to the same type. The bundle enforces a single source of truth for handler type definition.
-
-**Configuration Example:**
+This scenario occurs when both the legacy `type` key and a new `type_xxx` prefixed key are used for the same handler, even if they refer to the same type. The bundle enforces a single source of truth for handler type definition:
 
 ```yaml
 monolog:
   handlers:
     my_handler:
-      type: stream
-      type_stream: { }
+      type: stream # <-- "stream" type
+      type_stream: # <-- "stream" type
+        opt1: ...
+        opt2: ...
+        # ...
 ```
 
-**Actual Error:**
+Error:
 
 ```
 Invalid configuration for path "monolog.handlers.my_handler": A handler can only have one type defined. You have configured multiple types: type_stream and the legacy "type: stream" key. Please choose only one handler type (either a "type_xxx" prefixed key or the legacy "type" key).
@@ -115,19 +96,20 @@ Invalid configuration for path "monolog.handlers.my_handler": A handler can only
 
 ### 3. Legacy `type` and new `type_xxx` with different values
 
-Similar to **invalid case 2**, this scenario is when both syntaxes are used, but they define *different* handler types. This explicitly highlights the ambiguity.
-
-**Configuration Example:**
+Similar to **invalid case 2**, this scenario is when both syntaxes are used, but they define *different* handler types. This explicitly highlights the ambiguity:
 
 ```yaml
 monolog:
   handlers:
     my_handler:
-      type: rotating_file
-      type_stream: { }
+      type: rotating_file # <-- "rotating_file" type
+      type_stream:        # <-- "stream" type
+        opt1: ...
+        opt2: ...
+        # ...
 ```
 
-**Actual Error:**
+Error:
 
 ```
 Invalid configuration for path "monolog.handlers.my_handler": A handler can only have one type defined. You have configured multiple types: type_stream and the legacy "type: rotating_file" key. Please choose only one handler type (either a "type_xxx" prefixed key or the legacy "type" key).
