@@ -494,10 +494,10 @@ monolog:
                 ignore_error:         false
 
             # [Output] Writes log records to an Elasticsearch server.
-            type_elasticsearch:
+            type_elastic_search:
 
                 # Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually.
-                type:                 elasticsearch
+                type:                 elastic_search
 
                 # Defines the processing order; handlers with a higher priority value are executed first.
                 priority:             0
