@@ -44,9 +44,7 @@
 
 — MONOLOG 📝 ———————————————————————————————————————————————————————————————
   monolog_current               Dump the current configuration for MonologBundle (current APP_ENV)
-  monolog_current_xml           Dump the current configuration for MonologBundle (current APP_ENV, XML format)
   monolog_current@prod          Dump the current configuration for MonologBundle (PROD)
-
   monolog_default               Dump the default configuration for MonologBundle
   monolog_default_xml           Dump the default configuration for MonologBundle (XML format)
 
