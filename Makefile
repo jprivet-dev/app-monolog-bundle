@@ -236,14 +236,22 @@ composer_validate: ## Validate composer.json and composer.lock
 
 ## — MONOLOG 📝 ———————————————————————————————————————————————————————————————
 
-monolog_config: ## Dump the current configuration for MonologBundle (current APP_ENV)
+monolog_current: ## Dump the current configuration for MonologBundle (current APP_ENV)
 	$(CONSOLE) debug:config monolog $(ARG)
 
-monolog_config@prod: ARG=--env=prod
-monolog_config@prod: monolog_config ## Dump the current configuration for MonologBundle (PROD)
+monolog_current_xml: ARG=--format=xml
+monolog_current_xml: monolog_current## Dump the current configuration for MonologBundle (current APP_ENV, XML format)
 
-monolog_default_config: ## Dump the default configuration for MonologBundle
-	$(CONSOLE) config:dump-reference monolog
+monolog_current@prod: ARG=--env=prod
+monolog_current@prod: monolog_current ## Dump the current configuration for MonologBundle (PROD)
+
+##
+
+monolog_default: ## Dump the default configuration for MonologBundle
+	$(CONSOLE) config:dump-reference monolog $(ARG)
+
+monolog_default_xml: ARG=--format=xml
+monolog_default_xml: monolog_default ## Dump the default configuration for MonologBundle (XML format)
 
 ##
 
