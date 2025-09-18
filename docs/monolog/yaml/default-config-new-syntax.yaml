@@ -427,7 +427,7 @@ monolog:
                 # The formatter used to format the log records. Can be a service ID or a formatter configuration.
                 formatter:            ~
 
-            # [Deduplication] Prevents duplicate records to nested handler within timeframe. Requires nested handler.
+            # [Deduplication] Prevents identical log records from being passed to the nested handler within a specific time.
             type_deduplication:
 
                 # Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually.
@@ -554,7 +554,7 @@ monolog:
                 formatter:            ~
                 message_type:         0
 
-            # [Grouping] Sends records to first nested handler, falls back if it fails. Requires one or more nested handlers.
+            # [Grouping] Sends records to the first nested handler, falls back to the next if it fails.
             type_fallbackgroup:
 
                 # Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually.
@@ -978,7 +978,31 @@ monolog:
                 formatter:            ~
                 app_name:             null
 
-            # [Output] Discards all log records.
+            # [Output] A placeholder handler that discards all log messages, allowing temporary disablement.
+            type_noop:
+
+                # Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually.
+                type:                 noop
+
+                # Defines the processing order; handlers with a higher priority value are executed first.
+                priority:             0
+
+                # Level name or int value, defaults to DEBUG.
+                level:                DEBUG
+
+                # When true, messages are passed to the next handler in the stack; when false, the chain ends here.
+                bubble:               true
+
+                # When true, a full stack trace is included in the log record, especially for errors and exceptions.
+                include_stacktraces:  false
+
+                # When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler).
+                nested:               false
+
+                # The formatter used to format the log records. Can be a service ID or a formatter configuration.
+                formatter:            ~
+
+            # [Output] A handler that permanently discards all log messages.
             type_null:
 
                 # Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually.
@@ -1002,7 +1026,7 @@ monolog:
                 # The formatter used to format the log records. Can be a service ID or a formatter configuration.
                 formatter:            ~
 
-            # [Output] Writes log records to a Redis server using Predis.
+            # [Output] Writes log records to a Redis server using the Predis library.
             type_predis:
 
                 # Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually.
@@ -1062,7 +1086,7 @@ monolog:
                 timeout:              ~
                 connection_timeout:   ~
 
-            # [Output] Sends log records to a Sentry server (Raven client).
+            # [Output] Sends log records to a Sentry server (using the deprecated Raven client).
             type_raven:
 
                 # Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually.
@@ -1639,7 +1663,7 @@ monolog:
                 # The formatter used to format the log records. Can be a service ID or a formatter configuration.
                 formatter:            ~
 
-            # [Filtering] Activates nested handler if Symfony Console verbosity is sufficient. Requires nested handler.
+            # [Filtering] Passes records to nested handler based on Symfony Console verbosity.
             type_verbosity_levels:
 
                 # Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually.
@@ -1669,7 +1693,7 @@ monolog:
                     VERBOSITY_VERY_VERBOSE: INFO
                     VERBOSITY_DEBUG:      DEBUG
 
-            # [Grouping] Attempts sending records to first working nested handler, falls back on failure. Requires one or more nested handlers.
+            # [Grouping] Attempts to send records to all nested handlers, logs failure if none succeed.
             type_whatfailuregroup:
 
                 # Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually.

@@ -1,0 +1,1472 @@
+<!-- Default configuration for extension with alias: "monolog" -->
+<!-- Namespace: http://symfony.com/schema/dic/monolog -->
+<config use-microseconds="true">
+
+    <!-- prototype -->
+    <channel>scalar value</channel>
+
+    <!-- prototype -->
+    <!-- console-formater-options: Deprecated (Since symfony/monolog-bundle 3.7: "monolog.handlers.console_formater_options" is deprecated, use "monolog.handlers.console_formatter_options" instead.) -->
+    <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+    <!-- level: Level name or int value, defaults to DEBUG. -->
+    <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+    <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+    <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+    <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+    <!-- handler: The wrapped handler's name. -->
+    <!-- buffer-size: Defaults to 0 (unlimited). -->
+    <!-- min-level: Minimum level to accept (only used if accepted_levels not specified). -->
+    <!-- max-level: Maximum level to accept (only used if accepted_levels not specified). -->
+    <!-- action-level: Minimum level or service id to activate the handler, defaults to WARNING. -->
+    <!-- activation-strategy: Determines when the handler starts processing logs. Can be a log level or a service ID. -->
+    <!-- stop-buffering: Bool to disable buffering once the handler has been activated, defaults to true. -->
+    <!-- passthru-level: Level name or int value for messages to always flush, disabled by default. -->
+    <!-- token: Telegram bot access token provided by BotFather. -->
+    <!-- max-files: Files to keep, defaults to zero (infinite). -->
+    <!-- channel: Telegram channel name. -->
+    <!-- parse-mode: Optional the kind of formatting that is used for the message. -->
+    <!-- disable-webpage-preview: Disables link previews for links in the message. -->
+    <!-- disable-notification: Sends the message silently. Users will receive a notification with no sound. -->
+    <!-- split-long-messages: Split messages longer than 4096 bytes into multiple messages. -->
+    <!-- delay-between-messages: Adds a 1sec delay/sleep between sending split messages. -->
+    <handler
+        name="handler name"
+        type="null"
+        console-formater-options=""
+        priority="0"
+        level="DEBUG"
+        bubble="true"
+        include-stacktraces="false"
+        nested="false"
+        formatter=""
+        exchange=""
+        exchange-name="log"
+        handler=""
+        buffer-size="0"
+        flush-on-overflow="false"
+        console-formatter-options=""
+        url=""
+        time="60"
+        deduplication-level="400"
+        store="null"
+        index="monolog"
+        document-type="logs"
+        ignore-error="false"
+        message-type="0"
+        min-level="DEBUG"
+        max-level="EMERGENCY"
+        action-level="WARNING"
+        activation-strategy="null"
+        stop-buffering="true"
+        passthru-level="null"
+        token=""
+        source=""
+        room=""
+        message-format="text"
+        api-version="null"
+        notify="false"
+        nickname="Monolog"
+        use-ssl="true"
+        host="null"
+        timeout=""
+        connection-timeout=""
+        region=""
+        from-email=""
+        subject=""
+        app-name="null"
+        user=""
+        title="null"
+        dsn=""
+        client-id="null"
+        auto-log-stacks="false"
+        release="null"
+        environment="null"
+        id=""
+        path="%kernel.logs_dir%/%kernel.environment%.log"
+        max-files="0"
+        file-permission="null"
+        use-locking="false"
+        filename-format="{filename}-{date}"
+        date-format="Y-m-d"
+        factor="1"
+        fill-extra-context="false"
+        hub-id="null"
+        channel="null"
+        bot-name="Monolog"
+        use-attachment="true"
+        use-short-attachment="false"
+        include-extra="false"
+        icon-emoji="null"
+        team=""
+        webhook-url=""
+        connection-string=""
+        persistent=""
+        content-type="null"
+        mailer="null"
+        lazy="true"
+        ident="false"
+        facility="user"
+        logopts="1"
+        port="514"
+        parse-mode="null"
+        disable-webpage-preview="null"
+        disable-notification="null"
+        split-long-messages="false"
+        delay-between-messages="false"
+    >
+
+        <channels type="">
+
+            <!-- prototype -->
+            <channel>scalar value</channel>
+
+        </channels>
+
+        <process-psr-3-messages
+            enabled="null"
+            date-format=""
+            remove-used-context-fields=""
+        />
+
+        <!-- host: Elastic search host name, with scheme (e.g. "https://127.0.0.1:9200"). -->
+        <elasticsearch
+            id=""
+            host=""
+            port="9200"
+            transport="Http"
+            user="null"
+            password="null"
+        />
+
+        <!-- prototype -->
+        <member>scalar value</member>
+
+        <!-- prototype -->
+        <!-- List of levels to accept -->
+        <accepted-level>scalar value</accepted-level>
+
+        <!-- prototype -->
+        <!-- If set, the strategy will be changed to one that excludes 404s coming from URLs matching any of those patterns. -->
+        <excluded-404>scalar value</excluded-404>
+
+        <!-- prototype -->
+        <!-- If set, the strategy will be changed to one that excludes specific HTTP codes (requires Symfony Monolog bridge 4.1+). -->
+        <excluded-http-code code="">
+
+            <!-- prototype -->
+            <urls>scalar value</urls>
+
+        </excluded-http-code>
+
+        <publisher
+            id=""
+            hostname=""
+            port="12201"
+            chunk-size="1420"
+        />
+
+        <!-- prototype -->
+        <tag>scalar value</tag>
+
+        <!-- host: Database host name, optional if id is given. -->
+        <!-- user: Database user name -->
+        <!-- pass: Mandatory only if user is present. -->
+        <mongo
+            id=""
+            host=""
+            port="27017"
+            user=""
+            pass=""
+            database="monolog"
+            collection="logs"
+        />
+
+        <!-- prototype -->
+        <to-email>scalar value</to-email>
+
+        <!-- prototype -->
+        <header>scalar value</header>
+
+        <!-- id: Optional if host is given. -->
+        <!-- host: tcp://10.0.0.1:6379 -->
+        <predis
+            id=""
+            host=""
+        />
+
+        <!-- id: Optional if host is given. -->
+        <redis
+            id=""
+            host=""
+            password="null"
+            port="6379"
+            database="0"
+            key-name="monolog_redis"
+        />
+
+        <!-- prototype -->
+        <!-- Config values from https://github.com/rollbar/rollbar-php#configuration-reference. -->
+        <config>scalar value</config>
+
+        <!-- id: Required -->
+        <email-prototype
+            id=""
+            method="null"
+        />
+
+        <verbosity-levels
+            VERBOSITY-QUIET="ERROR"
+            VERBOSITY-NORMAL="WARNING"
+            VERBOSITY-VERBOSE="NOTICE"
+            VERBOSITY-VERY-VERBOSE="INFO"
+            VERBOSITY-DEBUG="DEBUG"
+        />
+
+        <!-- [Output] Publishes log records to an AMQP exchange. -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <type-amqp
+            type="amqp"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+            exchange=""
+            exchange-name="log"
+        />
+
+        <!-- [Output] Sends log records to the browser JavaScript console. -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <type-browser-console
+            type="browser_console"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+        />
+
+        <!-- [Buffering] Accumulates records, flushes to nested handler under conditions (e.g., buffer full, shutdown). Requires nested handler. -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <!-- handler: The wrapped handler's name. -->
+        <type-buffer
+            type="buffer"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+            handler=""
+            buffer-size="0"
+            flush-on-overflow="false"
+        />
+
+        <!-- [Filtering] Passes records to nested handler if they belong to specific channels. Requires nested handler. -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <type-channels
+            type="channels"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+        >
+
+            <channels type="">
+
+                <!-- prototype -->
+                <channel>scalar value</channel>
+
+            </channels>
+
+        </type-channels>
+
+        <!-- [Output] Sends log records to the ChromePHP extension. -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <type-chromephp
+            type="chromephp"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+        />
+
+        <!-- [Output] Writes log records to the console (Symfony Console output). -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <type-console
+            type="console"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+            console-formatter-options=""
+        >
+
+            <process-psr-3-messages
+                enabled="null"
+                date-format=""
+                remove-used-context-fields=""
+            />
+
+        </type-console>
+
+        <!-- [Output] Sends log records to a Cube server. -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <type-cube
+            type="cube"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+            url=""
+        />
+
+        <!-- [Output] Sends all log records to the Symfony debug bar. -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <type-debug
+            type="debug"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+        />
+
+        <!-- [Deduplication] Prevents identical log records from being passed to the nested handler within a specific time. -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <!-- handler: The wrapped handler's name. -->
+        <type-deduplication
+            type="deduplication"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+            handler=""
+            time="60"
+            deduplication-level="400"
+            store="null"
+        />
+
+        <!-- [Output] Writes log records to an Elasticsearch server using the Elastica client. -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <type-elastica
+            type="elastica"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+            index="monolog"
+            document-type="logs"
+            ignore-error="false"
+        >
+
+            <!-- host: Elastic search host name. Do not prepend with http(s)://. -->
+            <elasticsearch
+                id=""
+                host=""
+                port="9200"
+                transport="Http"
+                user="null"
+                password="null"
+            />
+
+        </type-elastica>
+
+        <!-- [Output] Writes log records to an Elasticsearch server. -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <type-elastic-search
+            type="elastic_search"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+            index="monolog"
+            document-type="logs"
+            ignore-error="false"
+        >
+
+            <!-- host: Elastic search host name, with scheme (e.g. "https://127.0.0.1:9200"). -->
+            <elasticsearch
+                id=""
+                host=""
+                port="9200"
+                transport="Http"
+                user="null"
+                password="null"
+            />
+
+        </type-elastic-search>
+
+        <!-- [Output] Sends log records to PHP's error_log function. -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <type-error-log
+            type="error_log"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+            message-type="0"
+        />
+
+        <!-- [Grouping] Sends records to the first nested handler, falls back to the next if it fails. -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <type-fallbackgroup
+            type="fallbackgroup"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+        >
+
+            <!-- prototype -->
+            <members>scalar value</members>
+
+        </type-fallbackgroup>
+
+        <!-- [Filtering] Passes records to nested handler if level matches criteria. Requires nested handler. -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <!-- handler: The wrapped handler's name. -->
+        <!-- min-level: Minimum level to accept (only used if accepted_levels not specified). -->
+        <!-- max-level: Maximum level to accept (only used if accepted_levels not specified). -->
+        <type-filter
+            type="filter"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+            handler=""
+            min-level="DEBUG"
+            max-level="EMERGENCY"
+        >
+
+            <!-- prototype -->
+            <!-- List of levels to accept -->
+            <accepted-levels>scalar value</accepted-levels>
+
+        </type-filter>
+
+        <!-- [Buffering] Buffers records, flushes to nested handler when action level reached. Requires nested handler. -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <!-- handler: The wrapped handler's name. -->
+        <!-- action-level: Minimum level or service id to activate the handler, defaults to WARNING. -->
+        <!-- activation-strategy: Determines when the handler starts processing logs. Can be a log level or a service ID. -->
+        <!-- stop-buffering: Bool to disable buffering once the handler has been activated, defaults to true. -->
+        <!-- passthru-level: Level name or int value for messages to always flush, disabled by default. -->
+        <!-- buffer-size: Defaults to 0 (unlimited). -->
+        <type-fingers-crossed
+            type="fingers_crossed"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+            handler=""
+            action-level="WARNING"
+            activation-strategy="null"
+            stop-buffering="true"
+            passthru-level="null"
+            buffer-size="0"
+        >
+
+            <!-- prototype -->
+            <!-- If set, the strategy will be changed to one that excludes 404s coming from URLs matching any of those patterns. -->
+            <excluded-404s>scalar value</excluded-404s>
+
+            <!-- prototype -->
+            <!-- If set, the strategy will be changed to one that excludes specific HTTP codes (requires Symfony Monolog bridge 4.1+). -->
+            <excluded-http-codes code="">
+
+                <!-- prototype -->
+                <urls>scalar value</urls>
+
+            </excluded-http-codes>
+
+        </type-fingers-crossed>
+
+        <!-- [Output] Sends log records to FirePHP in the browser console. -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <type-firephp
+            type="firephp"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+        />
+
+        <!-- [Output] Sends log records to Flowdock. -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <type-flowdock
+            type="flowdock"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+            token=""
+            source=""
+        />
+
+        <!-- [Output] Sends log records to a Graylog Extended Log Format (GELF) server. -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <type-gelf
+            type="gelf"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+        >
+
+            <publisher
+                id=""
+                hostname=""
+                port="12201"
+                chunk-size="1420"
+            />
+
+        </type-gelf>
+
+        <!-- [Grouping] Sends all records to multiple nested handlers simultaneously. Requires one or more nested handlers. -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <type-group
+            type="group"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+        >
+
+            <!-- prototype -->
+            <members>scalar value</members>
+
+        </type-group>
+
+        <!-- [Output] Sends log records to HipChat. -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <type-hipchat
+            type="hipchat"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+            room=""
+            message-format="text"
+            api-version="null"
+            notify="false"
+            nickname="Monolog"
+            token=""
+            use-ssl="true"
+            host="null"
+            timeout=""
+            connection-timeout=""
+        />
+
+        <!-- [Output] Sends log records to InsightOps (formerly Logentries). -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <type-insightops
+            type="insightops"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+            token=""
+            region=""
+            use-ssl="true"
+        />
+
+        <!-- [Output] Sends log records to Logentries. -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <type-logentries
+            type="logentries"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+            token=""
+            use-ssl="true"
+            timeout=""
+            connection-timeout=""
+        />
+
+        <!-- [Output] Sends log records to Loggly. -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <type-loggly
+            type="loggly"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+            token=""
+        >
+
+            <!-- prototype -->
+            <tags>scalar value</tags>
+
+        </type-loggly>
+
+        <!-- [Output] Writes log records to a MongoDB database. -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <type-mongo
+            type="mongo"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+        >
+
+            <!-- host: Database host name, optional if id is given. -->
+            <!-- user: Database user name -->
+            <!-- pass: Mandatory only if user is present. -->
+            <mongo
+                id=""
+                host=""
+                port="27017"
+                user=""
+                pass=""
+                database="monolog"
+                collection="logs"
+            />
+
+        </type-mongo>
+
+        <!-- [Output] Sends log records via PHP's native mail() function. -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <type-native-mailer
+            type="native_mailer"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+            from-email=""
+            subject=""
+        >
+
+            <!-- prototype -->
+            <to-email>scalar value</to-email>
+
+            <!-- prototype -->
+            <headers>scalar value</headers>
+
+        </type-native-mailer>
+
+        <!-- [Output] Sends log records to New Relic. -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <type-newrelic
+            type="newrelic"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+            app-name="null"
+        />
+
+        <!-- [Output] A placeholder handler that discards all log messages, allowing temporary disablement. -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <type-noop
+            type="noop"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+        />
+
+        <!-- [Output] A handler that permanently discards all log messages. -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <type-null
+            type="null"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+        />
+
+        <!-- [Output] Writes log records to a Redis server using the Predis library. -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <type-predis
+            type="predis"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+        >
+
+            <!-- id: Optional if host is given. -->
+            <!-- host: tcp://10.0.0.1:6379 -->
+            <predis
+                id=""
+                host=""
+            />
+
+        </type-predis>
+
+        <!-- [Output] Sends log records as Pushover notifications. -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <type-pushover
+            type="pushover"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+            token=""
+            user=""
+            title="null"
+            timeout=""
+            connection-timeout=""
+        />
+
+        <!-- [Output] Sends log records to a Sentry server (using the deprecated Raven client). -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <type-raven
+            type="raven"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+            dsn=""
+            client-id="null"
+            auto-log-stacks="false"
+            release="null"
+            environment="null"
+        />
+
+        <!-- [Output] Writes log records to a Redis server. -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <type-redis
+            type="redis"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+        >
+
+            <!-- id: Optional if host is given. -->
+            <redis
+                id=""
+                host=""
+                password="null"
+                port="6379"
+                database="0"
+                key-name="monolog_redis"
+            />
+
+        </type-redis>
+
+        <!-- [Output] Sends log records to Rollbar. -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <!-- id: RollbarNotifier service (mandatory if token is not provided). -->
+        <!-- token: Rollbar api token (skip if you provide a RollbarNotifier service id). -->
+        <type-rollbar
+            type="rollbar"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+            id=""
+            token=""
+        >
+
+            <!-- prototype -->
+            <!-- Config values from https://github.com/rollbar/rollbar-php#configuration-reference. -->
+            <config>scalar value</config>
+
+        </type-rollbar>
+
+        <!-- [Output] Writes log records to daily rotated files. -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <!-- max-files: Files to keep, defaults to zero (infinite). -->
+        <type-rotating-file
+            type="rotating_file"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+            path="%kernel.logs_dir%/%kernel.environment%.log"
+            max-files="0"
+            file-permission="null"
+            use-locking="false"
+            filename-format="{filename}-{date}"
+            date-format="Y-m-d"
+        />
+
+        <!-- [Sampling] Passes a fraction of records to nested handler based on factor. Requires nested handler. -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <!-- handler: The wrapped handler's name. -->
+        <type-sampling
+            type="sampling"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+            handler=""
+            factor="1"
+        />
+
+        <!-- [Output] Sends log records to a Sentry server (Sentry SDK). -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <type-sentry
+            type="sentry"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+            fill-extra-context="false"
+            dsn=""
+            hub-id="null"
+            client-id="null"
+            release="null"
+            environment="null"
+        />
+
+        <!-- [Output] Sends log records to the Symfony VarDumper server for real-time debugging. -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <!-- host: Server log host. ex: 127.0.0.1:9911 -->
+        <type-server-log
+            type="server_log"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+            host="null"
+        />
+
+        <!-- [Output] References an existing service as the Monolog handler. -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <type-service
+            type="service"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+            id=""
+        />
+
+        <!-- [Output] Sends log records to Slack via a custom API token. -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <!-- channel: Channel name (with starting #). -->
+        <!-- token: Slack api token -->
+        <type-slack
+            type="slack"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+            channel="null"
+            bot-name="Monolog"
+            use-attachment="true"
+            use-short-attachment="false"
+            include-extra="false"
+            icon-emoji="null"
+            token=""
+            timeout=""
+            connection-timeout=""
+        />
+
+        <!-- [Output] Sends log records to Slack via a Slackbot integration. -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <type-slackbot
+            type="slackbot"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+            channel="null"
+            team=""
+            token=""
+        />
+
+        <!-- [Output] Sends log records to Slack via a webhook. -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <type-slackwebhook
+            type="slackwebhook"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+            channel="null"
+            bot-name="Monolog"
+            use-attachment="true"
+            use-short-attachment="false"
+            include-extra="false"
+            icon-emoji="null"
+            webhook-url=""
+        />
+
+        <!-- [Output] Sends log records over a network socket. -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <type-socket
+            type="socket"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+            connection-string=""
+            timeout=""
+            connection-timeout=""
+            persistent=""
+        />
+
+        <!-- [Output] Writes log records to a specified stream or file. -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <type-stream
+            type="stream"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+            path="%kernel.logs_dir%/%kernel.environment%.log"
+            file-permission="null"
+            use-locking="false"
+        />
+
+        <!-- [Output] Sends log records via SwiftMailer. -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <type-swift-mailer
+            type="swift_mailer"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+            from-email=""
+            subject=""
+            content-type="null"
+            mailer="null"
+            lazy="true"
+        >
+
+            <!-- prototype -->
+            <to-email>scalar value</to-email>
+
+            <!-- id: Required -->
+            <email-prototype
+                id=""
+                method="null"
+            />
+
+        </type-swift-mailer>
+
+        <!-- [Output] Sends log records via Symfony Mailer. -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <type-symfony-mailer
+            type="symfony_mailer"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+            from-email=""
+            subject=""
+            content-type="null"
+            mailer="null"
+        >
+
+            <!-- prototype -->
+            <to-email>scalar value</to-email>
+
+            <!-- id: Required -->
+            <email-prototype
+                id=""
+                method="null"
+            />
+
+        </type-symfony-mailer>
+
+        <!-- [Output] Sends log records to the syslogd system logger. -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <type-syslog
+            type="syslog"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+            ident="false"
+            facility="user"
+            logopts="1"
+        />
+
+        <!-- [Output] Sends log records to a remote syslogd server via UDP. -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <type-syslogudp
+            type="syslogudp"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+            ident="false"
+            facility="user"
+            logopts="1"
+            host="null"
+            port="514"
+        />
+
+        <!-- [Output] Sends log records as Telegram messages. -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <!-- channel: Telegram channel name. -->
+        <!-- token: Telegram bot access token provided by BotFather. -->
+        <!-- parse-mode: Optional the kind of formatting that is used for the message. -->
+        <!-- disable-webpage-preview: Disables link previews for links in the message. -->
+        <!-- disable-notification: Sends the message silently. Users will receive a notification with no sound. -->
+        <!-- split-long-messages: Split messages longer than 4096 bytes into multiple messages. -->
+        <!-- delay-between-messages: Adds a 1sec delay/sleep between sending split messages. -->
+        <type-telegram
+            type="telegram"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+            channel="null"
+            token=""
+            parse-mode="null"
+            disable-webpage-preview="null"
+            disable-notification="null"
+            split-long-messages="false"
+            delay-between-messages="false"
+        />
+
+        <!-- [Output] Collects log records in memory for testing. -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <type-test
+            type="test"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+        />
+
+        <!-- [Filtering] Passes records to nested handler based on Symfony Console verbosity. -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <type-verbosity-levels
+            type="verbosity_levels"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+        >
+
+            <verbosity-levels
+                VERBOSITY-QUIET="ERROR"
+                VERBOSITY-NORMAL="WARNING"
+                VERBOSITY-VERBOSE="NOTICE"
+                VERBOSITY-VERY-VERBOSE="INFO"
+                VERBOSITY-DEBUG="DEBUG"
+            />
+
+        </type-verbosity-levels>
+
+        <!-- [Grouping] Attempts to send records to all nested handlers, logs failure if none succeed. -->
+        <!-- type: Automatically set by the bundle for internal use and backward compatibility. Do not define this key manually. -->
+        <!-- priority: Defines the processing order; handlers with a higher priority value are executed first. -->
+        <!-- level: Level name or int value, defaults to DEBUG. -->
+        <!-- bubble: When true, messages are passed to the next handler in the stack; when false, the chain ends here. -->
+        <!-- include-stacktraces: When true, a full stack trace is included in the log record, especially for errors and exceptions. -->
+        <!-- nested: When true, this handler is part of a nested handler configuration (e.g., as the primary handler of a FingersCrossedHandler). -->
+        <!-- formatter: The formatter used to format the log records. Can be a service ID or a formatter configuration. -->
+        <type-whatfailuregroup
+            type="whatfailuregroup"
+            priority="0"
+            level="DEBUG"
+            bubble="true"
+            include-stacktraces="false"
+            nested="false"
+            formatter=""
+        >
+
+            <!-- prototype -->
+            <members>scalar value</members>
+
+        </type-whatfailuregroup>
+
+    </handler>
+
+</config>
+
