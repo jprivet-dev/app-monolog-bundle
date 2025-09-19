@@ -12,10 +12,10 @@ This document clarifies the relationship between the handler configuration class
 | Type (legacy)      | New key type            | MonologBundle configuration              | Monolog handler             | Notes                                                            |
 |--------------------|-------------------------|------------------------------------------|-----------------------------|------------------------------------------------------------------|
 | `amqp`             | `type_amqp`             | AmqpHandlerConfiguration.php             | AmqpHandler.php             | ✅ DONE                                                           |
-| `browser_console`  | `type_browser_console`  | BrowserconsoleHandlerConfiguration.php   | BrowserConsoleHandler.php   | ➡️ Rename configuration file to be ISO with the handler name     |
+| `browser_console`  | `type_browser_console`  | BrowserConsoleHandlerConfiguration.php   | BrowserConsoleHandler.php   | ✅ DONE                                                           |
 | `buffer`           | `type_buffer`           | BufferHandlerConfiguration.php           | BufferHandler.php           | ✅ DONE                                                           |
 |                    |                         | ChannelsHandlerConfiguration.php         | ❌ No handler exists         | ✅ DONE                                                           |
-| `chromephp`        | `type_chromephp`        | ChromephpHandlerConfiguration.php        | ChromePHPHandler.php        | ➡️ Rename configuration file to be ISO with the handler name                                                           |
+| `chromephp`        | `type_chromephp`        | ChromePHPHandlerConfiguration.php        | ChromePHPHandler.php        | ✅ DONE                                                           |
 | `console`          | `type_console`          | ❌ No dedicated configuration             | CouchDBHandler.php          | ✅ DONE                                                           |
 | `cube`             | `type_cube`             | ConsoleHandlerConfiguration.php          | ❌ No handler exists         | ✅ DONE                                                           |
 |                    |                         | CubeHandlerConfiguration.php             | CubeHandler.php             | ✅ DONE                                                           |
@@ -27,19 +27,19 @@ This document clarifies the relationship between the handler configuration class
 | `elastica`         | `type_elastica`         | ElasticaHandlerConfiguration.php         | ElasticaHandler.php         | ✅ DONE                                                           |
 | `elasticsearch`    |                         | ElasticaHandlerConfiguration.php         | ElasticaHandler.php         | ❌ DEPRECATED (use `elastica` instead)                            |
 | `elastic_search`   | `type_elastic_search`   | ElasticsearchHandlerConfiguration.php    | ElasticsearchHandler.php    | ❌ ERROR (change `type_elasticsearch` into `type_elastic_search`) |
-| `error_log`        | `type_error_log`        | ErrorlogHandlerConfiguration.php         | ErrorLogHandler.php         | ➡️ Rename configuration file to be ISO with the handler name                                                           |
-| `fallbackgroup`    | `type_fallbackgroup`    | FallbackgroupHandlerConfiguration.php    | FallbackGroupHandler.php    | ➡️ Rename configuration file to be ISO with the handler name                                                           |
+| `error_log`        | `type_error_log`        | ErrorLogHandlerConfiguration.php         | ErrorLogHandler.php         | ✅ DONE                                                           |
+| `fallbackgroup`    | `type_fallbackgroup`    | FallbackGroupHandlerConfiguration.php    | FallbackGroupHandler.php    | ✅ DONE                                                           |
 | `filter`           | `type_filter`           | FilterHandlerConfiguration.php           | FilterHandler.php           | ✅ DONE                                                           |
-| `fingers_crossed`  | `type_fingers_crossed`  | FingerscrossedHandlerConfiguration.php   | FingersCrossedHandler.php   | ➡️ Rename configuration file to be ISO with the handler name                                                           |
-| `firephp`          | `type_firephp`          | FirephpHandlerConfiguration.php          | FirePHPHandler.php          | ➡️ Rename configuration file to be ISO with the handler name                                                           |
+| `fingers_crossed`  | `type_fingers_crossed`  | FingersCrossedHandlerConfiguration.php   | FingersCrossedHandler.php   | ✅ DONE                                                           |
+| `firephp`          | `type_firephp`          | FirePHPHandlerConfiguration.php          | FirePHPHandler.php          | ✅ DONE                                                           |
 |                    |                         |                                          | FleepHookHandler.php        | 🤔 No type! No configuration! What should we do?                 |
 | `flowdock`         | `type_flowdock`         | FlowdockHandlerConfiguration.php         | FlowdockHandler.php         | ✅ DONE                                                           |
 | `gelf`             | `type_gelf`             | GelfHandlerConfiguration.php             | GelfHandler.php             | ✅ DONE                                                           |
 | `group`            | `type_group`            | GroupHandlerConfiguration.php            | GroupHandler.php            | ✅ DONE                                                           |
 | `hipchat`          | `type_hipchat`          | HipchatHandlerConfiguration.php          | ❌ No handler exists         | ✅ DONE                                                           |
 |                    |                         | ❌ No dedicated configuration             | IFTTTHandler.php            | ✅ DO NOTHING                                                     |
-| `insightops`       | `type_insightops`       | InsightopsHandlerConfiguration.php       | InsightOpsHandler.php       | ➡️ Rename configuration file to be ISO with the handler name                                                           |
-| `logentries`       | `type_logentries`       | LogentriesHandlerConfiguration.php       | LogEntriesHandler.php       | ➡️ Rename configuration file to be ISO with the handler name                                                           |
+| `insightops`       | `type_insightops`       | InsightOpsHandlerConfiguration.php       | InsightOpsHandler.php       | ✅ DONE                                                           |
+| `logentries`       | `type_logentries`       | LogEntriesHandlerConfiguration.php       | LogEntriesHandler.php       | ✅ DONE                                                           |
 | `loggly`           | `type_loggly`           | LogglyHandlerConfiguration.php           | LogglyHandler.php           | ✅ DONE                                                           |
 |                    |                         |                                          | LogmaticHandler.php         | 🤔 No type! No configuration! What should we do?                 |
 | `mongo`            | `type_mongo`            | MongoHandlerConfiguration.php            | ❌ No handler exists         | ✅ DONE                                                           |
@@ -47,7 +47,7 @@ This document clarifies the relationship between the handler configuration class
 |                    |                         | ❌ No dedicated configuration             | MandrillHandler.php         | ✅ DO NOTHING                                                     |
 |                    |                         | ❌ No dedicated configuration             | MongoDBHandler.php          | ✅ DO NOTHING                                                     |
 | `native_mailer`    | `type_native_mailer`    | NativeMailerHandlerConfiguration.php     | NativeMailerHandler.php     | ✅ DONE                                                           |
-| `newrelic`         | `type_newrelic`         | NewrelicHandlerConfiguration.php         | NewRelicHandler.php         | ➡️ Rename configuration file to be ISO with the handler name                                                           |
+| `newrelic`         | `type_newrelic`         | NewRelicHandlerConfiguration.php         | NewRelicHandler.php         | ✅ DONE                                                           |
 | `noop`             | `type_noop`             |                                          | NoopHandler.php             | ❌ TODO                                                           |
 | `null`             | `type_null`             | NullHandlerConfiguration.php             | NullHandler.php             | ✅ DONE                                                           |
 |                    |                         |                                          | OverflowHandler.php         | 🤔 No type! No configuration! What should we do?                 |
@@ -60,7 +60,7 @@ This document clarifies the relationship between the handler configuration class
 | `redis`            | `type_redis`            | RedisHandlerConfiguration.php            | RedisHandler.php            | ✅ DONE                                                           |
 |                    |                         | ❌ No dedicated configuration             | RedisPubSubHandler.php      | ✅ DO NOTHING                                                     |
 | `rollbar`          | `type_rollbar`          | RollbarHandlerConfiguration.php          | RollbarHandler.php          | ✅ DONE                                                           |
-| `rotating_file`    | `type_rotating_file`    | RotatingfileHandlerConfiguration.php     | RotatingFileHandler.php     | ➡️ Rename configuration file to be ISO with the handler name                                                           |
+| `rotating_file`    | `type_rotating_file`    | RotatingFileHandlerConfiguration.php     | RotatingFileHandler.php     | ✅ DONE                                                           |
 | `sampling`         | `type_sampling`         | SamplingHandlerConfiguration.php         | SamplingHandler.php         | ✅ DONE                                                           |
 |                    |                         | ❌ No dedicated configuration             | SendGridHandler.php         | ✅ DO NOTHING                                                     |
 | `sentry`           | `type_sentry`           | SentryHandlerConfiguration.php           | ❌ No handler exists         | ✅ DONE                                                           |
@@ -68,18 +68,18 @@ This document clarifies the relationship between the handler configuration class
 |                    |                         | ServiceHandlerConfiguration.php          | ❌ No handler exists         | 🤔 No type but one configuration! What should we do?             |
 | `slackbot`         | `type_slackbot`         | SlackbotHandlerConfiguration.php         | ❌ No handler exists         | ✅ DONE                                                           |
 | `slack`            | `type_slack`            | SlackHandlerConfiguration.php            | SlackHandler.php            | ✅ DONE                                                           |
-| `slackwebhook`     | `type_slackwebhook`     | SlackwebhookHandlerConfiguration.php     | SlackWebhookHandler.php     | ➡️ Rename configuration file to be ISO with the handler name                                                           |
+| `slackwebhook`     | `type_slackwebhook`     | SlackWebhookHandlerConfiguration.php     | SlackWebhookHandler.php     | ✅ DONE                                                           |
 | `socket`           | `type_socket`           | SocketHandlerConfiguration.php           | SocketHandler.php           | ✅ DONE                                                           |
 |                    |                         | ❌ No dedicated configuration             | SqsHandler.php              | ✅ DO NOTHING                                                     |
 | `stream`           | `type_stream`           | StreamHandlerConfiguration.php           | StreamHandler.php           | ✅ DONE                                                           |
 | `swift_mailer`     | `type_swift_mailer`     | SwiftMailerHandlerConfiguration.php      | ❌ No handler exists         | ✅ DONE                                                           |
 | `symfony_mailer`   | `type_symfony_mailer`   | SymfonyMailerHandlerConfiguration.php    | SymfonyMailerHandler.php    | ✅ DONE                                                           |
 | `syslog`           | `type_syslog`           | SyslogHandlerConfiguration.php           | SyslogHandler.php           | ✅ DONE                                                           |
-| `syslogudp`        | `type_syslogudp`        | SyslogudpHandlerConfiguration.php        | SyslogUdpHandler.php        | ➡️ Rename configuration file to be ISO with the handler name                                                           |
-| `telegram`         | `type_telegram`         | TelegramHandlerConfiguration.php         | TelegramBotHandler.php      | ➡️ Rename configuration file to be ISO with the handler name                                                           |
+| `syslogudp`        | `type_syslogudp`        | SysLogUdpHandlerConfiguration.php        | SyslogUdpHandler.php        | ✅ DONE                                                           |
+| `telegram`         | `type_telegram`         | TelegramBotHandlerConfiguration.php      | TelegramBotHandler.php      | ✅ DONE                                                           |
 | `test`             | `type_test`             | TestHandlerConfiguration.php             | TestHandler.php             | ✅ DONE                                                           |
 |                    |                         | VerbosityLevelHandlerConfiguration.php   | ❌ No handler exists         | 🤔 No type but one configuration! What should we do?             |
-| `whatfailuregroup` | `type_whatfailuregroup` | WhatfailuregroupHandlerConfiguration.php | WhatFailureGroupHandler.php | ➡️ Rename configuration file to be ISO with the handler name                                                           |
+| `whatfailuregroup` | `type_whatfailuregroup` | WhatFailureGroupHandlerConfiguration.php | WhatFailureGroupHandler.php | ✅ DONE                                                           |
 |                    |                         | ❌ No dedicated configuration             | ZendMonitorHandler.php      | ✅ DO NOTHING                                                     |
 
 ## Handlers specific to MonologBundle (not in Monolog)
