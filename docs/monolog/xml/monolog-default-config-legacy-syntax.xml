@@ -1,0 +1,196 @@
+<!-- Default configuration for extension with alias: "monolog" -->
+<!-- Namespace: http://symfony.com/schema/dic/monolog -->
+<config use-microseconds="true">
+
+    <!-- prototype -->
+    <channel>scalar value</channel>
+
+    <!-- prototype -->
+    <!-- type: Required -->
+    <!-- console-formater-options: Deprecated (Since symfony/monolog-bundle 3.7: "monolog.handlers.console_formater_options" is deprecated, use "monolog.handlers.console_formatter_options" instead.) -->
+    <handler
+        name="handler name"
+        type=""
+        id=""
+        priority="0"
+        level="DEBUG"
+        bubble="true"
+        app-name="null"
+        fill-extra-context="false"
+        include-stacktraces="false"
+        path="%kernel.logs_dir%/%kernel.environment%.log"
+        file-permission="null"
+        use-locking="false"
+        filename-format="{filename}-{date}"
+        date-format="Y-m-d"
+        ident="false"
+        logopts="1"
+        facility="user"
+        max-files="0"
+        action-level="WARNING"
+        activation-strategy="null"
+        stop-buffering="true"
+        passthru-level="null"
+        min-level="DEBUG"
+        max-level="EMERGENCY"
+        buffer-size="0"
+        flush-on-overflow="false"
+        handler=""
+        url=""
+        exchange=""
+        exchange-name="log"
+        room=""
+        message-format="text"
+        api-version="null"
+        channel="null"
+        bot-name="Monolog"
+        use-attachment="true"
+        use-short-attachment="false"
+        include-extra="false"
+        icon-emoji="null"
+        webhook-url=""
+        team=""
+        notify="false"
+        nickname="Monolog"
+        token=""
+        region=""
+        source=""
+        use-ssl="true"
+        user=""
+        title="null"
+        host="null"
+        port="514"
+        connection-string=""
+        timeout=""
+        time="60"
+        deduplication-level="400"
+        store="null"
+        connection-timeout=""
+        persistent=""
+        dsn=""
+        hub-id="null"
+        client-id="null"
+        auto-log-stacks="false"
+        release="null"
+        environment="null"
+        message-type="0"
+        parse-mode="null"
+        disable-webpage-preview="null"
+        disable-notification="null"
+        split-long-messages="false"
+        delay-between-messages="false"
+        factor="1"
+        console-formater-options=""
+        console-formatter-options=""
+        formatter=""
+        nested="false"
+        index="monolog"
+        document-type="logs"
+        ignore-error="false"
+        from-email=""
+        subject=""
+        content-type="null"
+        mailer="null"
+        lazy="true"
+    >
+
+        <process-psr-3-messages
+            enabled="null"
+            date-format=""
+            remove-used-context-fields=""
+        />
+
+        <!-- prototype -->
+        <excluded-404>scalar value</excluded-404>
+
+        <!-- prototype -->
+        <excluded-http-code code="">
+
+            <!-- prototype -->
+            <urls>scalar value</urls>
+
+        </excluded-http-code>
+
+        <!-- prototype -->
+        <accepted-level>scalar value</accepted-level>
+
+        <!-- prototype -->
+        <config>scalar value</config>
+
+        <!-- prototype -->
+        <member>scalar value</member>
+
+        <!-- prototype -->
+        <tag>scalar value</tag>
+
+        <publisher
+            id=""
+            hostname=""
+            port="12201"
+            chunk-size="1420"
+        />
+
+        <mongo
+            id=""
+            host=""
+            port="27017"
+            user=""
+            pass=""
+            database="monolog"
+            collection="logs"
+        />
+
+        <elasticsearch
+            id=""
+            host=""
+            port="9200"
+            transport="Http"
+            user="null"
+            password="null"
+        />
+
+        <redis
+            id=""
+            host=""
+            password="null"
+            port="6379"
+            database="0"
+            key-name="monolog_redis"
+        />
+
+        <predis
+            id=""
+            host=""
+        />
+
+        <!-- prototype -->
+        <to-email>scalar value</to-email>
+
+        <!-- prototype -->
+        <header>scalar value</header>
+
+        <!-- id: Required -->
+        <email-prototype
+            id=""
+            method="null"
+        />
+
+        <verbosity-levels
+            VERBOSITY-QUIET="ERROR"
+            VERBOSITY-NORMAL="WARNING"
+            VERBOSITY-VERBOSE="NOTICE"
+            VERBOSITY-VERY-VERBOSE="INFO"
+            VERBOSITY-DEBUG="DEBUG"
+        />
+
+        <channels type="">
+
+            <!-- prototype -->
+            <channel>scalar value</channel>
+
+        </channels>
+
+    </handler>
+
+</config>
+

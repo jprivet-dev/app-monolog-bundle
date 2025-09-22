@@ -1,0 +1,428 @@
+#
+# COLORS
+#
+
+# (G)REEN, (R)ED, (Y)ELLOW & RE(S)ET
+G = "\\033[32m"
+R = "\\033[31m"
+Y = "\\033[33m"
+S = "\\033[0m"
+
+#
+# USER
+#
+
+USER_ID  = $(shell id -u)
+GROUP_ID = $(shell id -g)
+USER     = $(USER_ID):$(GROUP_ID)
+
+#
+# OS DETECTION
+#
+
+UNAME_S := $(shell uname -s)
+
+#
+# SYMFONY ENVIRONMENT VARIABLES
+#
+
+# Files are loaded in order of increasing priority. For more details, refer to:
+# - https://github.com/jprivet-dev/makefiles/tree/main/symfony-env-include
+# - https://www.gnu.org/software/make/manual/html_node/Environment.html
+# - https://github.com/symfony/recipes/issues/18
+# - https://symfony.com/doc/current/quick_tour/the_architecture.html#environment-variables
+# - https://symfony.com/doc/current/configuration.html#listing-environment-variables
+# - https://symfony.com/doc/current/configuration.html#overriding-environment-values-via-env-local
+-include .env
+-include .env.local
+-include .env.$(APP_ENV)
+-include .env.$(APP_ENV).local
+
+ifeq ($(APP_ENV),prod)
+$(info Warning: You are in the PROD environment)
+endif
+
+# See https://symfony.com/doc/current/deployment.html#b-configure-your-environment-variables
+ifneq ($(wildcard .env.local.php),)
+$(info Warning: In this Makefile it is not possible to use variables from .env.local.php file)
+endif
+
+#
+# FILES & DIRECTORIES
+#
+
+PWD            = $(shell pwd)
+NOW           := $(shell date +%Y%m%d-%H%M%S-%3N)
+COVERAGE_DIR   = build/coverage-$(NOW)
+COVERAGE_INDEX = $(PWD)/$(COVERAGE_DIR)/index.html
+
+#
+# DOCKER OPTIONS
+# See https://github.com/dunglas/symfony-docker/blob/main/docs/options.md
+#
+
+UP_ENV ?=
+
+define append
+  ifneq ($($1),)
+    UP_ENV += $1=$($1)
+  endif
+endef
+
+PROJECT_NAME    ?= $(shell basename $(CURDIR))
+SERVER_NAME      = $(PROJECT_NAME).localhost
+IMAGES_PREFIX    = $(PROJECT_NAME)-
+
+HTTP_PORT  ?= 8080
+HTTPS_PORT ?= 8443
+HTTP3_PORT ?= $(HTTPS_PORT)
+
+$(eval $(call append,APP_ENV))
+$(eval $(call append,XDEBUG_MODE))
+$(eval $(call append,SERVER_NAME))
+$(eval $(call append,IMAGES_PREFIX))
+$(eval $(call append,SYMFONY_VERSION))
+$(eval $(call append,STABILITY))
+$(eval $(call append,HTTP_PORT))
+$(eval $(call append,HTTPS_PORT))
+$(eval $(call append,HTTP3_PORT))
+$(eval $(call append,CADDY_MERCURE_JWT_SECRET))
+
+# Will be ":PORT" if HTTP_PORT is defined, otherwise empty.
+HTTP_PORT_SUFFIX = $(if $(HTTP_PORT),:$(HTTP_PORT))
+
+# Will be ":PORT" if HTTPS_PORT is defined and not 443, otherwise empty.
+HTTPS_PORT_SUFFIX = $(if $(HTTPS_PORT),$(if $(filter-out 443,$(HTTPS_PORT)),:$(HTTPS_PORT)))
+
+#
+# DOCKER COMMANDS
+#
+
+COMPOSE_V2 := $(shell docker compose version 2> /dev/null)
+
+ifndef COMPOSE_V2
+$(error Docker Compose CLI plugin is required but is not available on your system)
+endif
+
+COMPOSE = docker compose
+
+# In a first step, you can test the application's production behavior in a development environment by setting APP_ENV=prod.
+# To test the full Docker production setup (e.g., optimized images, production-specific configurations), you can also add USE_COMPOSE_PROD_YAML=true.
+# This allows for a smooth transition from testing the code's behavior to testing the full Docker infrastructure.
+ifeq ($(USE_COMPOSE_PROD_YAML),prod)
+ifeq ($(APP_ENV),prod)
+COMPOSE = docker compose -f compose.yaml -f compose.prod.yaml
+endif
+endif
+
+CONTAINER_PHP = $(COMPOSE) exec $(DOCKER_EXEC_ENV) php
+PHP           = $(CONTAINER_PHP) php
+COMPOSER      = $(CONTAINER_PHP) composer
+BASH_COMMAND  = $(CONTAINER_PHP) bash -c
+CONSOLE       = $(PHP) bin/console
+PHPUNIT       = $(PHP) bin/phpunit
+
+## — 🐳 🎵 THE SYMFONY STARTER MAKEFILE 🎵 🐳 —————————————————————————————————
+
+# Print self-documented Makefile:
+# $ make
+# $ make help
+
+.DEFAULT_GOAL = help
+.PHONY: help
+help: ## Display this help message with available commands
+	@grep -E '(^[.a-zA-Z_-]+[^:]+:.*##.*?$$)|(^#{2})' Makefile | awk 'BEGIN {FS = "## "}; { \
+		split($$1, line, ":"); targets=line[1]; description=$$2; \
+		if (targets == "##") { printf "\033[33m%s\n", ""; } \
+		else if (targets == "" && description != "") { printf "\033[33m\n%s\n", description; } \
+		else if (targets != "" && description != "") { split(targets, parts, " "); target=parts[1]; alias=parts[2]; printf "\033[32m  %-26s \033[34m%-2s \033[0m%s\n", target, alias, description; } \
+	}'
+	@echo
+
+## — PROJECT 🚀 ———————————————————————————————————————————————————————————————
+
+.PHONY: start
+start: up_detached images info ## Start the project and show info (up_detached & info alias)
+
+.PHONY: stop
+stop: down ## Stop the project (down alias)
+
+.PHONY: restart
+restart: stop start ## Stop & Start the project and show info (up_detached & info alias)
+
+.PHONY: info
+info: ## Show project access info
+	@printf "\n$(Y)Info$(S)"
+	@printf "\n$(Y)----$(S)\n\n"
+	@printf " $(Y)›$(S) Open $(G)https://$(SERVER_NAME)$(HTTPS_PORT_SUFFIX)/$(S) in your browser and accept the auto-generated TLS certificate\n"
+	@printf "\n"
+
+.PHONY: install
+install: clone_monolog up_detached composer_install images info ## Start the project, install dependencies and show info
+
+.PHONY: check
+check: composer_validate tests ## Check everything before you deliver
+
+.PHONY: tests
+tests t: phpunit monolog_phpunit ## Run all tests (app & repositories/monolog-bundle)
+
+##
+
+clone_monolog: ## Clone Symfony Monolog Bundle in repositories directory
+	@printf "\n$(Y)Clone Symfony Monolog Bundle in repositories directory$(S)"
+	@printf "\n$(Y)------------------------------------------------------$(S)\n\n"
+	@if [ ! -d "repositories/monolog-bundle" ]; then \
+		git -C repositories clone git@github.com:jprivet-dev/monolog-bundle.git --branch handler-configuration-segmentation; \
+	else \
+		printf " $(G)✔$(S) Repository Symfony Monolog Bundle already exists, skipping clone operation.\n"; \
+	fi
+
+## — SYMFONY 🎵 ———————————————————————————————————————————————————————————————
+
+.PHONY: symfony
+symfony sf: ## Run Symfony console command - Usage: make symfony ARG="cache:clear"
+	$(CONSOLE) $(ARG)
+
+.PHONY: cc
+cc: ## Clear the Symfony cache
+	$(CONSOLE) cache:clear
+
+.PHONY: about
+about: ## Display information about the current Symfony project
+	$(CONSOLE) about
+
+.PHONY: dotenv
+dotenv: ## Lists all .env files with variables and values
+	$(CONSOLE) debug:dotenv
+
+.PHONY: dumpenv
+dumpenv: git_safe_dir ## Generate .env.local.php for production
+	$(COMPOSER) dump-env prod
+
+## — PHP 🐘 ———————————————————————————————————————————————————————————————————
+
+.PHONY: php
+php: ## Run PHP command - $ make php [ARG=<arguments>]- Example: $ make php ARG=--version
+	$(PHP) $(ARG)
+
+php_sh: ## Connect to the PHP container shell
+	$(CONTAINER_PHP) sh
+
+## — COMPOSER 🧙 ——————————————————————————————————————————————————————————————
+
+.PHONY: composer
+composer: ## Run composer command - $ make composer [ARG=<arguments>] - Example: $ make composer ARG="require --dev phpunit/phpunit"
+	$(COMPOSER) $(ARG)
+
+composer_install: ## Install Composer packages
+ifeq ($(APP_ENV),prod)
+	$(COMPOSER) install --verbose --prefer-dist --no-progress --no-interaction --no-dev --optimize-autoloader
+else
+	$(COMPOSER) install
+endif
+
+composer_update: ## Update Composer packages
+ifeq ($(APP_ENV),prod)
+	$(COMPOSER) update --verbose --prefer-dist --no-progress --no-interaction --no-dev --optimize-autoloader
+else
+	$(COMPOSER) update
+endif
+
+composer_update_lock: ## Update only the content hash of composer.lock without updating dependencies
+	$(COMPOSER) update --lock
+
+composer_validate: ## Validate composer.json and composer.lock
+	$(COMPOSER) validate --strict --check-lock
+
+## — MONOLOG 📝 ———————————————————————————————————————————————————————————————
+
+monolog_current: ## Dump the current configuration for MonologBundle (current APP_ENV)
+	$(CONSOLE) debug:config monolog $(ARG)
+
+monolog_current@prod: ARG=--env=prod
+monolog_current@prod: monolog_current ## Dump the current configuration for MonologBundle (PROD)
+
+monolog_default: ## Dump the default configuration for MonologBundle
+	$(CONSOLE) config:dump-reference monolog $(ARG)
+
+monolog_default_xml: ARG=--format=xml
+monolog_default_xml: monolog_default ## Dump the default configuration for MonologBundle (XML format)
+
+##
+
+monolog_install: ## [repositories/monolog-bundle] Installs the MonologBundle's dependencies in its isolated vendor directory
+	$(BASH_COMMAND) "cd /app/repositories/monolog-bundle && composer install"
+
+monolog_phpunit: ## [repositories/monolog-bundle] Run automated tests for MonologBundle in its isolated PHPUnit
+	$(BASH_COMMAND) "cd /app/repositories/monolog-bundle && ./vendor/bin/simple-phpunit $(ARG)"
+
+monolog_dox: ARG=--testdox
+monolog_dox: monolog_phpunit ## [repositories/monolog-bundle] Report test execution progress in TestDox format for MonologBundle in its isolated PHPUnit
+
+monolog_coverage: DOCKER_EXEC_ENV=-e XDEBUG_MODE=coverage
+monolog_coverage: ARG=--coverage-html /app/$(COVERAGE_DIR)
+monolog_coverage: monolog_phpunit ## [repositories/monolog-bundle] Generate code coverage report in HTML format for MonologBundle in its isolated PHPUnit
+	@printf " $(G)✔$(S) Open in your favorite browser the file $(Y)$(COVERAGE_INDEX)$(S)\n"
+
+## — TESTS ✅ —————————————————————————————————————————————————————————————————
+
+.PHONY: phpunit
+phpunit: ## Run PHPUnit - $ make phpunit [ARG=<arguments>] - Example: $ make phpunit ARG="tests/myTest.php"
+	$(PHPUNIT) $(ARG)
+
+.PHONY: coverage
+coverage: DOCKER_EXEC_ENV=-e XDEBUG_MODE=coverage
+coverage: ARG=--coverage-html $(COVERAGE_DIR)
+coverage: phpunit ## Generate code coverage report in HTML format for all tests
+	@printf " $(G)✔$(S) Open in your favorite browser the file $(Y)$(COVERAGE_INDEX)$(S)\n"
+
+.PHONY: dox
+dox: ARG=--testdox
+dox: phpunit ## Report test execution progress in TestDox format for all tests
+
+##
+
+xdebug_version: ## Xdebug version number
+	$(PHP) -r "var_dump(phpversion('xdebug'));"
+
+## — BASH 💻 ——————————————————————————————————————————————————————————————————
+
+.PHONY: command
+command: ## Run a command inside the PHP container - $ make command [ARG=<arguments>]- Example: $ make command ARG="ls -al"
+	$(BASH_COMMAND) "$(ARG)"
+
+## — DOCKER 🐳 ————————————————————————————————————————————————————————————————
+
+.PHONY: up
+up: ## Start the containers - $ make up [ARG=<arguments>] - Example: $ make up ARG=-d
+	$(UP_ENV) $(COMPOSE) up --wait --remove-orphans $(ARG)
+	$(MAKE) git_safe_dir
+	$(MAKE) git_safe_dir_monolog
+
+up_detached: ARG=-d
+up_detached: up ## Start the containers (wait for services to be running|healthy - detached mode)
+
+.PHONY: down
+down: ## Stop and remove the containers
+	-$(COMPOSE) down --remove-orphans
+
+.PHONY: build
+build: ## Build or rebuild Docker services - $ make build [ARG=<arguments>] - Example: $ make build ARG=--no-cache
+	$(COMPOSE) build $(ARG)
+
+.PHONY: build_force
+build_force: ARG=--no-cache
+build_force: build ## Build or rebuild Docker services (no cache) - $ make build [ARG=<arguments>]
+
+.PHONY: logs
+logs: ## Display container logs
+	$(COMPOSE) logs -f
+
+.PHONY: images
+images: ## List images used by the current containers
+	@printf "\n$(Y)Images used by the current containers$(S)"
+	@printf "\n$(Y)-------------------------------------$(S)\n\n"
+	$(COMPOSE) images | grep -E "REPOSITORY|$(IMAGES_PREFIX)"
+
+.PHONY: config
+config: ## Parse, resolve, and render compose file in canonical format
+	$(UP_ENV) $(COMPOSE) config
+
+## — CERTIFICATES 🔐‍️ ——————————————————————————————————————————————————————————
+
+.PHONY: certificates
+certificates: ## Installs the Caddy TLS certificate to the trust store
+	@printf "\n$(Y)Copying the Caddy certificate to trust store$(S)"
+	@printf "\n$(Y)--------------------------------------------$(S)\n\n"
+	@if [ ! -f /tmp/caddy_root.crt ]; then \
+		$(CONTAINER_PHP) sh -c "cat /data/caddy/pki/authorities/local/root.crt" > /tmp/caddy_root.crt; \
+	fi
+ifeq ($(UNAME_S),Darwin)
+	@printf " $(Y)› OS: macOS$(S)\n"
+	@sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain /tmp/caddy_root.crt
+	@rm /tmp/caddy_root.crt
+else ifeq ($(UNAME_S),Linux)
+	@printf " $(Y)› OS: Linux$(S)\n"
+	@sudo cp /tmp/caddy_root.crt /usr/local/share/ca-certificates/caddy_root.crt
+	@sudo update-ca-certificates
+	@rm /tmp/caddy_root.crt
+endif
+	@printf " $(G)✔$(S) The Caddy root certificate has been added to the trust store.\n"
+
+certificates_export: ## Exports the Caddy root certificate from the container to the host
+	@$(CONTAINER_PHP) sh -c "cat /data/caddy/pki/authorities/local/root.crt" > tls/root.crt
+	@printf " $(G)✔$(S) The Caddy root certificate has been exported to $(Y)tls/root.crt$(S).\n"
+	@printf " $(Y)›$(S) You may need to manually import this certificate into your browser's trust store:\n"
+	@printf "    - $(Y)Chrome/Brave:$(S) Go to chrome://settings/certificates and import the file 'tls/root.crt' under 'Authorities'.\n"
+	@printf "    - $(Y)Firefox:$(S) Go to about:preferences#privacy, click 'View Certificates...' and import 'tls/root.crt' under 'Authorities'.\n"
+	@printf "\n"
+
+.PHONY: hosts
+hosts: ## Add the server name to /etc/hosts file
+	@if ! grep -q "$(SERVER_NAME)" /etc/hosts; then \
+		echo "127.0.0.1 $(SERVER_NAME)" | sudo tee -a /etc/hosts > /dev/null; \
+		printf " $(G)✔$(S) \"$(SERVER_NAME)\" added to /etc/hosts.\n"; \
+	else \
+		printf " $(G)✔$(S) \"$(SERVER_NAME)\" already exists in /etc/hosts.\n"; \
+	fi
+
+## — TROUBLESHOOTING 😵️ ———————————————————————————————————————————————————————
+
+.PHONY: permissions
+permissions p: ## Fix file permissions (primarily for Linux hosts)
+ifeq ($(UNAME_S),Linux)
+	$(COMPOSE) run --rm php chown -R $(USER) .
+	@printf " $(G)✔$(S) You are now defined as the owner $(Y)$(USER)$(S) of the project files.\n"
+else
+	@printf " $(Y)›$(S) 'make permissions' is typically not needed on $(UNAME_S).\n"
+endif
+
+git_safe_dir: ## Add /app to Git's safe directories within the php container
+	$(COMPOSE) exec php git config --global --add safe.directory /app
+
+git_safe_dir_monolog: repositories/monolog-bundle ## Add /app/repositories/monolog-bundle to Git's safe directories within the php container
+	$(COMPOSE) exec php git config --global --add safe.directory /app/repositories/monolog-bundle
+
+## — UTILITIES 🛠️ ——————————————————————————————————————————————————————————————
+
+env_files: ## Show env files loaded into this Makefile
+	@printf "\n$(Y)Symfony env files$(S)"
+	@printf "\n$(Y)-----------------$(S)\n\n"
+	@printf "Files loaded into this Makefile (in order of decreasing priority) $(Y)[APP_ENV=$(APP_ENV)]$(S):\n\n"
+ifneq ("$(wildcard .env.$(APP_ENV).local)","")
+	@printf "* $(G)✔$(S) .env.$(APP_ENV).local\n"
+else
+	@printf "* $(R)⨯$(S) .env.$(APP_ENV).local\n"
+endif
+ifneq ("$(wildcard .env.$(APP_ENV))","")
+	@printf "* $(G)✔$(S) .env.$(APP_ENV)\n"
+else
+	@printf "* $(R)⨯$(S) .env.$(APP_ENV)\n"
+endif
+ifneq ("$(wildcard .env.local)","")
+	@printf "* $(G)✔$(S) .env.local\n"
+else
+	@printf "* $(R)⨯$(S) .env.local\n"
+endif
+ifneq ("$(wildcard .env)","")
+	@printf "* $(G)✔$(S) .env\n"
+else
+	@printf "* $(R)⨯$(S) .env\n"
+endif
+
+.PHONY: vars
+vars: ## Show key Makefile variables
+	@printf "\n$(Y)Vars$(S)"
+	@printf "\n$(Y)----$(S)\n\n"
+	@printf "USER         : $(USER)\n"
+	@printf "UNAME_S      : $(UNAME_S)\n"
+	@printf "APP_ENV      : $(APP_ENV)\n"
+	@printf "REPOSITORY   : $(REPOSITORY)\n"
+	@printf "UP_ENV       : $(UP_ENV)\n"
+	@printf "COMPOSE_V2   : $(COMPOSE_V2)\n"
+	@printf "COMPOSE      : $(COMPOSE)\n"
+	@printf "CONTAINER_PHP: $(CONTAINER_PHP)\n"
+	@printf "PHP          : $(PHP)\n"
+	@printf "COMPOSER     : $(COMPOSER)\n"
+	@printf "CONSOLE      : $(CONSOLE)\n"
+	@printf "PHPUNIT      : $(PHPUNIT)\n"
