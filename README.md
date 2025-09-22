@@ -2,10 +2,9 @@
 
 ## Presentation
 
-This project is a **dockerized environment** designed to streamline the contribution process for the **MonologBundle**. It provides a fully functional Symfony application that you can use to test the work on the `handler-configuration-segmentation` branch of the `jprivet-dev/monolog-bundle` fork. The goal is to offer a consistent and isolated sandbox, allowing you to focus on developing and testing the features without worrying about local environment setup.
+This project is a **dockerized environment** designed to streamline the contribution process for the **MonologBundle**. It provides a fully functional Symfony application that you can use to test the work on my fork: https://github.com/jprivet-dev/monolog-bundle/tree/handler-configuration-segmentation.
 
-* External link: https://github.com/jprivet-dev/monolog-bundle/tree/handler-configuration-segmentation
-* Internal docs: [MonologBundle: what problem do we want to solve?](docs/monolog.md)
+> [MonologBundle: what problem do we want to solve?](docs/monolog.md)
 
 ## Prerequisites
 
